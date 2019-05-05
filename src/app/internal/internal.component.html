@@ -1,0 +1,17 @@
+<div class="page-wrapper" [ngClass]="{'toggled' : getSideBarState()}">
+    <main class="page-content">
+        <sidebar></sidebar>
+        <navbar></navbar>
+        <div class="container-fluid">
+            <div class="pl-3 pr-3">
+                <router-outlet class="mt-4"></router-outlet>
+            </div>
+            <div class="attribution text-center badge badge-warning">
+                Criado por <strong>Mouse Soluções</strong>
+            </div>
+        </div>
+        <div class="overlay" (click)="toggleSidebar()" [ngClass]="{'show' : !getSideBarState()}"></div>
+    </main>
+
+    <!-- <a href="https://github.com/azouaoui-med/angular-pro-sidebar"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_orange_ff7600.png" alt="Fork me on GitHub"></a> -->
+</div>
