@@ -1,44 +1,55 @@
-<div class="container">
-    <div class="row">            
-        <div class="login-container col-lg-4 col-md-6 col-sm-8 col-xs-12">
-             <div class="login-title text-center">
-                    <h2><span>Mouse<strong>Soluções</strong></span></h2>
-             </div>
-            <div class="login-content">
-                <div class="login-header ">
-                    <h3><strong>Bem-vindo(a),</strong></h3>
-                    <h5>Aproveite o sistema e tenha todas as informações sob seu controle.</h5>
+<div class="image-background-login">
+    <div class="container">
+        <div class="row">
+            <div class="login-container col-lg-4 col-md-6 col-sm-8 col-xs-12">
+                <div class="login-title text-center">
+                    <h2><span>Mouse<strong> Soluções</strong></span></h2>
                 </div>
-                <div class="login-body">
-                    <form role="form" [formGroup]="formLogin" action="" method="post" class="login-form">
-                        <div class="form-group ">
-                            <div class="pos-r">                                        
-                                <input   id="form-username" formControlName="username" type="text" name="form-username" placeholder="Login" class="form-username form-control">
-                                <i class="fa fa-user"></i>
+                <div class="login-content">
+                    <div class="login-header ">
+                        <h3><strong>Bem-vindo(a),</strong></h3>
+                        <h5>Aproveite o sistema e tenha todas as informações sob seu controle.</h5>
+                    </div>
+                    <div class="login-body">
+                        <form role="form" [formGroup]="formLogin" action="" method="post" class="login-form">
+                            <div class="form-group ">
+                                <div class="pos-r">
+                                    <input formControlName="email" type="text" placeholder="Email"
+                                        class="form-username form-control" required autofocus>
+                                    <i class="fa fa-user"></i>
+                                </div>
+                                <div *ngIf="f.email.errors && (f.email.dirty || f.email.touched)">
+                                    <div *ngIf="f.email.errors.required" class="error">Campo obrigatório</div>
+                                    <div *ngIf="f.email.errors.email" class="error">E-mail inválido</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="pos-r">                                    
-                                <input id="form-password" type="password" formControlName="password" name="form-password" placeholder="Senha" class="form-password form-control" >
-                                <i class="fa fa-lock"></i>                                        
+                            <div class="form-group">
+                                <div class="pos-r">
+                                    <input id="form-password" type="password" formControlName="password"
+                                        name="form-password" placeholder="Senha" class="form-password form-control">
+                                    <i class="fa fa-lock"></i>
+                                </div>
+                                <div *ngIf="f.password.errors && (f.password.dirty || f.password.touched)">
+                                    <div *ngIf="f.password.errors.required" class="error">Campo obrigatório</div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group text-right">     
-                            <a href="#" class="bold"> Esqueceu sua senha?</a>
-                        </div>   
+                            <div class="form-group text-right">
+                                <a href="#" class="bold"> Esqueceu sua senha?</a>
+                            </div>
 
-                        <div class="form-group">     
-                            <button type="submit" class="btn btn-primary col-lg-12"><strong>Entrar</strong></button>  
-                        </div>   
-                                                                      
-                    </form>
-                </div> <!-- end  login-body -->                     
-            </div><!-- end  login-content -->  
-            <div class="login-footer text-center template">
-                <h5>Não possui uma conta?<a href="#" class="bold"> Criar Conta </a>     </h5>
-                 <h5>Pet Green foi feito pela <a href="#" class="bold"> Mouse Soluções</a></h5>                   
-            </div>
-        </div>  <!-- end  login-container -->      
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary col-lg-12"><strong>Entrar</strong></button>
+                            </div>
 
+                        </form>
+                    </div> <!-- end  login-body -->
+                </div><!-- end  login-content -->
+                <div class="login-footer text-center template">
+                    <h5>Não possui uma conta? <a href="registro" class="bold">Criar Conta</a> </h5>
+                    <h5>Pet Green foi feito pela <a href="#" class="bold"> Mouse Soluções</a></h5>
+                </div>
+            </div> <!-- end  login-container -->
+
+        </div>
     </div>
 </div>

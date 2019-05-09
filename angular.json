@@ -28,6 +28,7 @@
             ],
             "styles": [
               "node_modules/sweetalert2/dist/sweetalert2.min.css",
+              "src/assets/sass/pet-green.scss",
               "src/styles.scss"
             ],
             "scripts": [

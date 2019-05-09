@@ -1,0 +1,153 @@
+<div class="image-background-create-account">
+    <navbar [external]="true"></navbar>
+    <div class="create-account-content">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-5 col-md-4 ml-auto">
+                    <div class="info-area info-horizontal mt-5">
+                        <div class="icon icon-primary">
+                            <i class="fas fa-chart-line" style="font-size: 2.5rem;"></i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">Destaque-se!</h4>
+                            <p class="description"> Avaliações diárias mostram como melhorar seu negócio.
+                                conte com a interface de fácil atendimento a seus pacientes, aumentando a agilidade do
+                                seu dia-a-dia. </p>
+                        </div>
+                    </div>
+                    <div class="info-area info-horizontal mt-5">
+                        <div class="icon icon-primary">
+                            <i class="fas fa-user-shield" style="font-size: 2.0rem;"></i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">Foco na Segurança e Mobilidade</h4>
+                            <p class="description"> Tecnologia moderna, monitoramento, segurança e facilidade na
+                                utilização
+                                do nosso sistema, confira!</p>
+                        </div>
+                    </div>
+                    <div class="info-area info-horizontal mt-5">
+                        <div class="icon icon-primary">
+                            <i class="fas fa-hand-holding-usd" style="font-size: 2.0rem;"></i>
+                        </div>
+                        <div class="description">
+                            <h4 class="info-title">Preço Acessível</h4>
+                            <p class="description"> Venha conhecer um jeito rápido e fácil de investir no seu negócio!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 mr-auto mt-3">
+                    <div class="card text-center">
+                        <div class="card-header">
+                            <h4 class="card-title">Cadastre-se</h4>
+                            <div>
+                                <p class="card-description">Você tem sete dias de teste grátis. Aproveite as
+                                    funcionalidades que o nosso sistema oferece!</p>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <form [formGroup]="formAccountRegister" class="form">
+                                <div class="form-group">
+                                    <div class="input-group" [ngClass]="{'input-group-focus':focusName===true}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon1">
+                                                <i class="fas fa-user"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control" formControlName="name"
+                                            aria-describedby="basic-addon1" type="text" placeholder="Nome Completo"
+                                            (focus)="focusName=true" (blur)="focusName=false">
+                                    </div>
+                                    <div *ngIf="f.name.errors && (f.name.dirty || f.name.touched)">
+                                        <small class="d-flex justify-content-start text-danger"
+                                            *ngIf="f.name.errors.required">Campo
+                                            obrigatório</small>
+                                        <small class="d-flex justify-content-start text-danger"
+                                            *ngIf="f.name.errors.pattern">O campo possui valores inválidos</small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" [ngClass]="{'input-group-focus':focusEmail===true}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="fas fa-envelope"></i>
+                                            </span>
+                                        </div>
+                                        <input class="form-control" formControlName="email"
+                                            aria-describedby="basic-addon2" type="email" placeholder="Email"
+                                            (focus)="focusEmail=true" (blur)="focusEmail=false">
+                                    </div>
+                                    <div *ngIf="f.email.errors  && (f.email.dirty || f.email.touched)">
+                                        <small class="d-flex justify-content-start text-danger"
+                                            *ngIf="f.email.errors.required">Campo
+                                            obrigatório</small>
+                                        <small class="d-flex justify-content-start text-danger"
+                                            *ngIf="f.email.errors.email">E-mail inválido</small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" [ngClass]="{'input-group-focus':focusContact===true}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="fas fa-phone"></i> </span>
+                                        </div>
+                                        <input class="form-control" formControlName="contact"
+                                            aria-describedby="basic-addon2" type="text"
+                                            placeholder="Telefone para contato" (focus)="focusContact=true"
+                                            (blur)="focusContact=false" maxlength="15" required telefone>
+                                    </div>
+                                    <div *ngIf="f.contact.errors  && (f.contact.dirty || f.contact.touched)">
+                                        <small class="d-flex justify-content-start text-danger"
+                                            *ngIf="f.contact.errors.required">Campo
+                                            obrigatório</small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group" [ngClass]="{'input-group-focus':focusPassword===true}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="fas fa-key"></i> </span>
+                                        </div>
+                                        <input class="form-control" formControlName="password"
+                                            aria-describedby="basic-addon2" type="password" placeholder="Senha"
+                                            (focus)="focusPassword=true" (blur)="focusPassword=false">
+                                    </div>
+                                    <div *ngIf="f.password.errors  && (f.password.dirty || f.password.touched)">
+                                        <small class="d-flex justify-content-start text-danger"
+                                            *ngIf="f.password.errors.required">Campo
+                                            obrigatório</small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="input-group"
+                                        [ngClass]="{'input-group-focus':focusConfirmPassword===true}">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="basic-addon2">
+                                                <i class="fas fa-lock"></i></span>
+                                        </div>
+                                        <input class="form-control" formControlName="confirmPassword" (blur)="validateConfirmPassword()"
+                                            aria-describedby="basic-addon2" type="password"
+                                            placeholder="Confirmar Senha" (focus)="focusConfirmPassword=true"
+                                            (blur)="focusConfirmPassword=false">
+                                    </div>
+                                    <div
+                                        *ngIf="f.confirmPassword.errors  && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+                                        <small class="d-flex justify-content-start text-danger"
+                                            *ngIf="f.confirmPassword.errors.required">Campo
+                                            obrigatório</small>
+                                        <small class="d-flex justify-content-start text-danger"
+                                            *ngIf="f.confirmPassword.errors.incorrect">As senhas não correspondem</small>
+                                    </div>
+                                </div>
+                                <div class="card-footer text-muted">
+                                    <button type="button" class="btn btn-success btn-round col-lg-8">Cadastrar</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

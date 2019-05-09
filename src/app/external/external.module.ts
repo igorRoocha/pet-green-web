@@ -10,6 +10,7 @@ import { DirectiveModule } from '../directive/directive.module';
 import { MODULE_COMPONENTS_EXTERNAL, MODULE_SERVICES_EXTERNAL } from './external.route';
 import localePT from '@angular/common/locales/pt';
 import { ComponentsModule } from '../components/components.module';
+import { CreateAccountComponent } from './create-account/create-account.component';
 
 registerLocaleData(localePT);
 
@@ -17,12 +18,13 @@ registerLocaleData(localePT);
     imports: [
       BrowserModule,
       BrowserAnimationsModule,
-      RouterModule.forChild([]),
       ReactiveFormsModule,
       UtilModule,
       HttpModule,
       DirectiveModule,
-      ComponentsModule
+      ComponentsModule,
+      RouterModule.forChild([]),
+      ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
     ],
     exports: [
         MODULE_COMPONENTS_EXTERNAL

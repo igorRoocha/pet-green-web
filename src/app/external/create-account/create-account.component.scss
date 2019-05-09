@@ -1,0 +1,187 @@
+.card {
+  border: 0;
+  border-radius: 12px;
+  color: #252422;
+  margin-bottom: 20px;
+}
+
+.card .card-header .card-title {
+  margin-top: 10px;
+}
+
+.card .card-header:not([data-background-color]) {
+  background-color: transparent;
+}
+
+.card .card-header {
+  padding: 15px 15px 0;
+  border: 0;
+}
+
+.card-footer {
+  margin-top: 20px;
+  margin-bottom: 5px;
+  background-color: transparent;
+  border: 0;
+}
+
+.card .footer .stats,
+.card-description,
+.description,
+.footer-big p {
+  color: #9a9a9a;
+  font-weight: 400;
+}
+
+h4 {
+  font-size: 1.714em;
+  line-height: 1.45em;
+}
+
+.card-title {
+  margin-bottom: 0.75rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.full-page.register-page .info-horizontal .icon {
+  margin-top: 0;
+}
+
+.full-page.register-page .info-horizontal {
+  padding: 0 0 20px;
+  text-align: left !important;
+}
+
+p.description {
+  font-size: 1.4em;
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+}
+
+.info-horizontal .description {
+  overflow: hidden;
+}
+
+.description,
+.info-area .icon:not(.icon-circle) {
+  color: rgba(7, 7, 7, 0.836);
+}
+
+.info-horizontal .icon {
+  float: left;
+  margin-top: 23px;
+  margin-right: 10px;
+}
+
+.info-horizontal .icon {
+  margin-top: 0;
+}
+
+.info-title {
+  color: rgb(110, 199, 52);
+  font-weight: bold;
+  font-size: 15pt;
+}
+
+.create-account-content {
+  padding-top: 10vh;
+}
+
+.input-group {
+  background: #fff;
+  .input-group-append .input-group-text {
+    background: transparent;
+    border: 1px solid #dddddd;
+    border-left: none;
+  }
+
+  .input-group-prepend .input-group-text {
+    margin-right: 0;
+    background: transparent;
+    border: 1px solid #dddddd;
+  }
+
+  &.input-group-focus {
+    .input-group-prepend .input-group-text {
+      border: 1px solid #9a9a9a;
+    }
+  }
+}
+
+
+.input-group .form-control:last-child {
+  border-left: 0 none;
+}
+
+.form-control {
+  background-color: #e3e3e3;
+  color: #66615b;
+}
+
+.input-group {
+  margin-top: 15px;
+}
+
+.input-group .input-group-focus .input-group-addon {
+  border-color: #9a9a9a;
+}
+
+.form-control {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  color: #66615b;
+  line-height: normal;
+  font-size: 14px;
+  transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out, background-color 0.3s ease-in-out;
+  box-shadow: none;
+  &:focus {
+    background-color: #ffffff;
+    border: 1px solid #9a9a9a;
+    outline: 0;
+  }
+}
+
+.input-group-text {
+  display: flex;
+  align-items: center;
+  padding: 0.375rem 0.75rem;
+  margin-bottom: 0;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  text-align: center;
+  white-space: nowrap;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+}
+
+.btn-round {
+  border-radius: 30px;
+}
+
+@media screen and (max-width: 1025px) {
+  .input-group .input-group-addon {
+    padding-right: 10px;
+  }
+}
+
+.image-background-create-account {
+  background: url("../../../assets/img/create-account/cat.jpg") #132533 no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  overflow: hidden;
+  height: 100vh;
+}
+
+@media only screen and (max-height: 600px) {
+  .image-background-create-account {
+    height: 200vh;
+    overflow: hidden;
+  }
+}

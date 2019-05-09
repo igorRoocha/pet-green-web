@@ -98,10 +98,23 @@
     padding: 0;
   }
 }
-@media only screen and (max-height: 400px) {
+@media only screen and (max-height: 100px) {
   .login-container {
     position: static;
     transform: none;
     padding: 0;
   }
+}
+
+.image-background-login {
+  background: url("../../../assets/img/login/dog-login.jpg") #132533 no-repeat center center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  height: 100vh;
+}
+
+.error {
+  color: #c72424;
+  font-weight: 600;
+  font-size: 15px;
 }
