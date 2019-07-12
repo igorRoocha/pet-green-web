@@ -1,3 +1,4 @@
+import { AppBotstrapModule } from './../app-bootstrap.module';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -17,6 +18,7 @@ import { MODULE_COMPONENTS, MODULE_SERVICES_COMPONENTS,  } from './components.ro
         DirectiveModule,
         ReactiveFormsModule,
         PerfectScrollbarModule,
+        AppBotstrapModule,
         UtilModule,
         HttpModule,
         RouterModule.forChild([]),
@@ -26,6 +28,9 @@ import { MODULE_COMPONENTS, MODULE_SERVICES_COMPONENTS,  } from './components.ro
         MODULE_COMPONENTS
     ],
     declarations: [
+        MODULE_COMPONENTS
+    ],
+    entryComponents: [
         MODULE_COMPONENTS
     ],
     providers: [

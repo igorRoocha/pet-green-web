@@ -1,6 +1,7 @@
-<nav class="navbar fixed-top navbar-expand-lg" style="background: rgb(253, 253, 253);">
-    <button class="btn btn-outline-success" *ngIf="!external" (click)="toggleSidebar()"><i class="fas fa-bars"></i></button>
-    <a class="ml-3" (click)="redirect(app/home)" style="color:#28A745; text-decoration: none;">
+<nav class="navbar fixed-top navbar-expand-lg navbar-light" style="background: rgb(253, 253, 253);border-bottom: 1px solid rgb(219, 219, 219);">
+    <button class="btn btn-outline-success" *ngIf="!external" (click)="toggleSidebar()"><i
+            class="fas fa-bars"></i></button>
+    <a class="ml-3" href="{{home}}" style="color:#28A745; text-decoration: none;">
         <h3>Pet Green</h3>
     </a><i class="fas fa-paw ml-2" style="font-size: 1.5rem;"></i>
 </nav>

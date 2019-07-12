@@ -39,6 +39,10 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
   cursor: default;
 }
 
+.cursor-click {
+  cursor: pointer;
+}
+
 html, body {
   max-width: 100%;
   overflow-x: hidden;
@@ -48,4 +52,11 @@ html, body {
 .text-danger {
   color: #e7432d !important;
   font-size: 11px;
+}
+
+#pageTitle {
+  color: #505856;
+  font-weight: 400;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  font-size: 16pt;
 }

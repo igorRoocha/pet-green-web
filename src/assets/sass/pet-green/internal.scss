@@ -1,0 +1,13 @@
+input:focus {
+  box-shadow: none;
+  border: 1px solid #9a9a9a;
+}
+
+:host ::ng-deep .tab-style a.nav-link {
+  border-bottom: none;
+}
+
+:host ::ng-deep .tab-style a.nav-link.active {
+  border-top: 3px solid #28a745;
+}
+

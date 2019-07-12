@@ -8,10 +8,12 @@ import { SidebarService } from '../sidebar/sidebar.service';
 })
 export class NavbarComponent implements OnInit {
   @Input() external = false;
+  public home;
 
   constructor(private sidebarservice: SidebarService) { }
 
   ngOnInit() {
+    this.home = this.external ? 'login' : 'app/home';
   }
 
   public toggleSidebar() {

@@ -34,10 +34,8 @@ export class SidebarService {
       },
       submenus: [
         {
-          title: 'Classificações cliente'
-        },
-        {
-          title: 'Clínica / Consultório'
+          title: 'Clínica / Consultório',
+          path: 'app/cadastrar-empresa'
         },
         {
           title: 'Espécies / Raças'
@@ -74,9 +72,6 @@ export class SidebarService {
         },
         {
           title: 'Vacinas'
-        },
-        {
-          title: 'Vias de administração'
         }
       ]
     },

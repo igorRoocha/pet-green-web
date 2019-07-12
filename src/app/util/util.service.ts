@@ -1,6 +1,6 @@
 import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
-import {Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { LOCALSTORAGE_TOKEN_KEY } from '../../assets/constants';
 import { RouteStack } from '../models/route-setack';
 
@@ -15,11 +15,11 @@ export class UtilService {
 
   private routeStack = [] as RouteStack[];
 
-  public errorMsg(msg: string = 'Ocorreu um erro desconhecido! Entre em contato com nossos administradores.',
-                  callback: Function = () => {
+  public errorMsg(msg: string = 'Ocorreu um erro desconhecido! Entre em contato com nossos administradores.', title = 'Erro',
+    callback: Function = () => {
     }): void {
     swal.fire({
-      title: 'Erro',
+      title: title,
       text: msg,
       type: 'error',
     }).then(callback);
@@ -35,19 +35,9 @@ export class UtilService {
     }).then(callback);
   }
 
-  public successMsgInternal(msg: string): void {
-    this.validateMsg(msg);
-    swal({
-      title: 'Sucesso!',
-      text: msg,
-      icon: 'success',
-      button: 'OK',
-    });
-  }
-
   public informationMsg(msg: string): void {
     this.validateMsg(msg);
-    swal(msg);
+    swal.fire({ text: msg });
   }
 
   public confirmMsg(msg: string, title: string, callback: Function): void {
@@ -109,7 +99,7 @@ export class UtilService {
   public getLogin(): string {
     if (this.isLogged()) {
       const obj = JSON.parse(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY));
-      return obj.Login;
+      return obj.email;
     }
     return null;
   }
@@ -117,7 +107,7 @@ export class UtilService {
   public getProfile(): any {
     if (this.isLogged()) {
       const obj = JSON.parse(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY));
-      return obj.role;
+      return obj.profile;
     }
     return null;
   }
@@ -133,7 +123,7 @@ export class UtilService {
   public getId(): string {
     if (this.isLogged()) {
       const obj = JSON.parse(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY));
-      return obj.ID;
+      return obj.id;
     }
     return null;
   }
@@ -141,7 +131,7 @@ export class UtilService {
   public getName(): string {
     if (this.isLogged()) {
       const obj = JSON.parse(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY));
-      return obj.UserName;
+      return obj.name;
     }
     return null;
   }
@@ -182,7 +172,7 @@ export class UtilService {
   }
 
   public formatCPF(cpf) {
-    if(!this.stringIsNullOrEmpty(cpf)) {
+    if (!this.stringIsNullOrEmpty(cpf)) {
       cpf = cpf.replace(/[^\d]/g, '');
       return cpf.replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, '$1.$2.$3-$4');
     }
@@ -201,12 +191,25 @@ export class UtilService {
   }
 
   public formatCep(cep) {
-    if(!this.stringIsNullOrEmpty(cep)) {
+    if (!this.stringIsNullOrEmpty(cep)) {
       const re = /^([\d]{2})\.?([\d]{3})\-?([\d]{3})/;
       return cep.replace(re, '$1$2-$3');
     }
 
     return;
+  }
+
+  public validateCpfAndCnpj(value: string): boolean {
+    if (!this.stringIsNullOrEmpty(value)) {
+      value = value.replace(/[^\d]+/g, '');
+      if (value.length === 11 && !this.validateCPF(value)) {
+        return false;
+      } else if (value.length === 14 && !this.validateCNPJ(value)) {
+        return false;
+      }
+    }
+
+    return true;
   }
 
   public validateCNPJ(cnpj: any): boolean {
@@ -297,7 +300,7 @@ export class UtilService {
     if ((rest === 10) || (rest === 11)) {
       rest = 0;
     }
-// tslint:disable-next-line: radix
+    // tslint:disable-next-line: radix
     return rest === parseInt(cpf.substring(10, 11));
   }
 
@@ -311,174 +314,182 @@ export class UtilService {
   public convertStates(val) {
     let data;
 
-    switch (val.toUpperCase()) {
-      /* UFs */
-      case 'AC':
-        data = 'Acre';
-        break;
-      case 'AL':
-        data = 'Alagoas';
-        break;
-      case 'AM':
-        data = 'Amazonas';
-        break;
-      case 'AP':
-        data = 'Amapá';
-        break;
-      case 'BA':
-        data = 'Bahia';
-        break;
-      case 'CE':
-        data = 'Ceará';
-        break;
-      case 'DF':
-        data = 'Distrito Federal';
-        break;
-      case 'ES':
-        data = 'Espírito Santo';
-        break;
-      case 'GO':
-        data = 'Goiás';
-        break;
-      case 'MA':
-        data = 'Maranhão';
-        break;
-      case 'MG':
-        data = 'Minas Gerais';
-        break;
-      case 'MS':
-        data = 'Mato Grosso do Sul';
-        break;
-      case 'MT':
-        data = 'Mato Grosso';
-        break;
-      case 'PA':
-        data = 'Pará';
-        break;
-      case 'PB':
-        data = 'Paraíba';
-        break;
-      case 'PE':
-        data = 'Pernambuco';
-        break;
-      case 'PI':
-        data = 'Piauí';
-        break;
-      case 'PR':
-        data = 'Paraná';
-        break;
-      case 'RJ':
-        data = 'Rio de Janeiro';
-        break;
-      case 'RN':
-        data = 'Rio Grande do Norte';
-        break;
-      case 'RO':
-        data = 'Rondônia';
-        break;
-      case 'RR':
-        data = 'Roraima';
-        break;
-      case 'RS':
-        data = 'Rio Grande do Sul';
-        break;
-      case 'SC':
-        data = 'Santa Catarina';
-        break;
-      case 'SE':
-        data = 'Sergipe';
-        break;
-      case 'SP':
-        data = 'São Paulo';
-        break;
-      case 'TO':
-        data = 'Tocantíns';
-        break;
+    if (!this.stringIsNullOrEmpty(val)) {
+      switch (val.toUpperCase()) {
+        /* UFs */
+        case 'AC':
+          data = 'Acre';
+          break;
+        case 'AL':
+          data = 'Alagoas';
+          break;
+        case 'AM':
+          data = 'Amazonas';
+          break;
+        case 'AP':
+          data = 'Amapá';
+          break;
+        case 'BA':
+          data = 'Bahia';
+          break;
+        case 'CE':
+          data = 'Ceará';
+          break;
+        case 'DF':
+          data = 'Distrito Federal';
+          break;
+        case 'ES':
+          data = 'Espírito Santo';
+          break;
+        case 'GO':
+          data = 'Goiás';
+          break;
+        case 'MA':
+          data = 'Maranhão';
+          break;
+        case 'MG':
+          data = 'Minas Gerais';
+          break;
+        case 'MS':
+          data = 'Mato Grosso do Sul';
+          break;
+        case 'MT':
+          data = 'Mato Grosso';
+          break;
+        case 'PA':
+          data = 'Pará';
+          break;
+        case 'PB':
+          data = 'Paraíba';
+          break;
+        case 'PE':
+          data = 'Pernambuco';
+          break;
+        case 'PI':
+          data = 'Piauí';
+          break;
+        case 'PR':
+          data = 'Paraná';
+          break;
+        case 'RJ':
+          data = 'Rio de Janeiro';
+          break;
+        case 'RN':
+          data = 'Rio Grande do Norte';
+          break;
+        case 'RO':
+          data = 'Rondônia';
+          break;
+        case 'RR':
+          data = 'Roraima';
+          break;
+        case 'RS':
+          data = 'Rio Grande do Sul';
+          break;
+        case 'SC':
+          data = 'Santa Catarina';
+          break;
+        case 'SE':
+          data = 'Sergipe';
+          break;
+        case 'SP':
+          data = 'São Paulo';
+          break;
+        case 'TO':
+          data = 'Tocantíns';
+          break;
 
-      /* Estados */
-      case 'ACRE':
-        data = 'AC';
-        break;
-      case 'ALAGOAS':
-        data = 'AL';
-        break;
-      case 'AMAZONAS':
-        data = 'AM';
-        break;
-      case 'AMAPÁ':
-        data = 'AP';
-        break;
-      case 'BAHIA':
-        data = 'BA';
-        break;
-      case 'CEARÁ':
-        data = 'CE';
-        break;
-      case 'DISTRITO FEDERAL':
-        data = 'DF';
-        break;
-      case 'ESPÍRITO SANTO':
-        data = 'ES';
-        break;
-      case 'GOIÁS':
-        data = 'GO';
-        break;
-      case 'MARANHÃO':
-        data = 'MA';
-        break;
-      case 'MINAS GERAIS':
-        data = 'MG';
-        break;
-      case 'MATO GROSSO DO SUL':
-        data = 'MS';
-        break;
-      case 'MATO GROSSO':
-        data = 'MT';
-        break;
-      case 'PARÁ':
-        data = 'PA';
-        break;
-      case 'PARAÍBA':
-        data = 'PB';
-        break;
-      case 'PERNAMBUCO':
-        data = 'PE';
-        break;
-      case 'PIAUÍ':
-        data = 'PI';
-        break;
-      case 'PARANÁ':
-        data = 'PR';
-        break;
-      case 'RIO DE JANEIRO':
-        data = 'RJ';
-        break;
-      case 'RIO GRANDE DO NORTE':
-        data = 'RN';
-        break;
-      case 'RONDÔNIA':
-        data = 'RO';
-        break;
-      case 'RORAIMA':
-        data = 'RR';
-        break;
-      case 'RIO GRANDE DO SUL':
-        data = 'RS';
-        break;
-      case 'SANTA CATARINA':
-        data = 'SC';
-        break;
-      case 'SERGIPE':
-        data = 'SE';
-        break;
-      case 'SÃO PAULO':
-        data = 'SP';
-        break;
-      case 'TOCANTÍNS':
-        data = 'TO';
-        break;
+        /* Estados */
+        case 'ACRE':
+          data = 'AC';
+          break;
+        case 'ALAGOAS':
+          data = 'AL';
+          break;
+        case 'AMAZONAS':
+          data = 'AM';
+          break;
+        case 'AMAPÁ':
+          data = 'AP';
+          break;
+        case 'BAHIA':
+          data = 'BA';
+          break;
+        case 'CEARÁ':
+          data = 'CE';
+          break;
+        case 'DISTRITO FEDERAL':
+          data = 'DF';
+          break;
+        case 'ESPÍRITO SANTO':
+          data = 'ES';
+          break;
+        case 'GOIÁS':
+          data = 'GO';
+          break;
+        case 'MARANHÃO':
+          data = 'MA';
+          break;
+        case 'MINAS GERAIS':
+          data = 'MG';
+          break;
+        case 'MATO GROSSO DO SUL':
+          data = 'MS';
+          break;
+        case 'MATO GROSSO':
+          data = 'MT';
+          break;
+        case 'PARÁ':
+          data = 'PA';
+          break;
+        case 'PARAÍBA':
+          data = 'PB';
+          break;
+        case 'PERNAMBUCO':
+          data = 'PE';
+          break;
+        case 'PIAUÍ':
+          data = 'PI';
+          break;
+        case 'PARANÁ':
+          data = 'PR';
+          break;
+        case 'RIO DE JANEIRO':
+          data = 'RJ';
+          break;
+        case 'RIO GRANDE DO NORTE':
+          data = 'RN';
+          break;
+        case 'RONDÔNIA':
+          data = 'RO';
+          break;
+        case 'RORAIMA':
+          data = 'RR';
+          break;
+        case 'RIO GRANDE DO SUL':
+          data = 'RS';
+          break;
+        case 'SANTA CATARINA':
+          data = 'SC';
+          break;
+        case 'SERGIPE':
+          data = 'SE';
+          break;
+        case 'SÃO PAULO':
+          data = 'SP';
+          break;
+        case 'TOCANTÍNS':
+          data = 'TO';
+          break;
+      }
     }
 
     return data;
+  }
+
+  public removeMasks(value) {
+    if (!this.stringIsNullOrEmpty(value)) {
+      return value.replace(/[()-./ ]/g, '');
+    }
   }
 }

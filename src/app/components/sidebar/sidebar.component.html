@@ -10,47 +10,47 @@
           <img class="img-responsive img-rounded" src="assets/img/user.jpg" alt="User picture">
         </div>
         <div class="user-info">
-          <span class="user-name">Igor Rocha
+          <span class="user-name">{{userName}}
           </span>
-          <span class="user-role">Administrador</span>
-          <span class="user-status">
+          <span class="user-role">{{profile}}</span>
+          <!-- <span class="user-status">
             <i class="fa fa-circle"></i>
             <span>Online</span>
-          </span>
+          </span> -->
         </div>
       </div>
-      <div class="sidebar-menu">
+      <div class="sidebar-menu mb-4">
         <ul>
           <li *ngFor="let menu of menus"
             [ngClass]="{'active': menu.active , 'sidebar-dropdown':menu.type === 'dropdown' , 'header-menu':menu.type === 'header'}">
             <span *ngIf="menu.type === 'header'">{{menu.title}}</span>
-            <a *ngIf="menu.type !== 'header'" class="cursor-default" (click)='toggle(menu); redirect(menu);'>
+            <a *ngIf="menu.type !== 'header'" class="cursor-click" (click)='toggle(menu); redirect(menu);'>
               <i class="{{menu.icon}}"></i>
               <span>{{menu.title}}</span>
               <span *ngIf="menu.badge" class="badge badge-pill" [ngClass]="menu.badge.class">{{menu.badge.text}}</span>
             </a>
             <div *ngIf="menu.type === 'dropdown'" class="sidebar-submenu" [@slide]="getState(menu)">
               <ul>
-                <li *ngFor="let submenu of menu.submenus" 
+                <li *ngFor="let submenu of menu.submenus"
                   [ngClass]="{'active': submenu.active , 'sidebar-dropdown':submenu.type === 'dropdown'}">
-                  <a *ngIf="menu.type !== 'header'" class="cursor-default" (click)='toggle(submenu)'> {{submenu.title}}
+                  <a *ngIf="menu.type !== 'header'" class="cursor-click" (click)='toggle(submenu);  redirect(submenu);'> {{submenu.title}}
                     <span *ngIf="submenu.badge" class="badge badge-pill"
                       [ngClass]="submenu.badge.class">{{submenu.badge.text}}</span>
                   </a>
                   <div *ngIf="menu.type === 'dropdown'" class="sidebar-submenu" [@slide]="getState(submenu)">
-                      <li *ngFor="let sublevel of submenu.sublevels">
-                          <a *ngIf="menu.type !== 'header'" class="cursor-default"> {{sublevel.title}}
-                              <span *ngIf="sublevel.badge" class="badge badge-pill"
-                                [ngClass]="sublevel.badge.class">{{sublevel.badge.text}}</span>
-                            </a>
-                      </li>
-                  </div>
+                <li *ngFor="let sublevel of submenu.sublevels">
+                  <a *ngIf="menu.type !== 'header'" class="cursor-click" (click)=" redirect(sublevel);"> {{sublevel.title}}
+                    <span *ngIf="sublevel.badge" class="badge badge-pill"
+                      [ngClass]="sublevel.badge.class">{{sublevel.badge.text}}</span>
+                  </a>
                 </li>
-              </ul>
             </div>
           </li>
         </ul>
       </div>
-    </perfect-scrollbar>
+      </li>
+      </ul>
+  </div>
+  </perfect-scrollbar>
   </div>
 </nav>

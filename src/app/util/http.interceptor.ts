@@ -1,6 +1,8 @@
+import { UtilService } from './util.service';
+import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 
 import { throwError as observableThrowError, Observable } from 'rxjs';
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { ConnectionBackend, RequestOptions, Request, RequestOptionsArgs, Response, Http, Headers } from '@angular/http';
 import { Router } from '@angular/router';
 import { LOCALSTORAGE_TOKEN_KEY } from '../../assets/constants';
@@ -9,35 +11,22 @@ import { map, finalize, catchError } from 'rxjs/operators';
 declare var swal: any;
 
 @Injectable()
-export class InterceptedHttp extends Http {
-    constructor(backend: ConnectionBackend, defaultOptions: RequestOptions, private router: Router) {
-        super(backend, defaultOptions);
+export class InterceptedHttp implements HttpInterceptor {
+    constructor(@Inject(UtilService) private utilService: UtilService) {
     }
 
-    request(url: Request, options?: RequestOptionsArgs): Observable<Response> {
+
+    intercept(
+        req: HttpRequest<any>,
+        next: HttpHandler
+    ): Observable<HttpEvent<any>> {
         this.beforeRequest();
 
-        return super.request(url, this.getRequestOptionArgs(options))
-            .pipe(map(res => res),
-                finalize(() => {
-                    this.afterRequest();
-                }));
-    }
+        return next.handle(req).pipe(map(res => res),
+            finalize(() => {
+                this.afterRequest();
+            }));
 
-    get(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return super.get(url, this.getRequestOptionArgs(options));
-    }
-
-    post(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-        return super.post(url, body, this.getRequestOptionArgs(options));
-    }
-
-    put(url: string, body: string, options?: RequestOptionsArgs): Observable<Response> {
-        return super.put(url, body, this.getRequestOptionArgs(options));
-    }
-
-    delete(url: string, options?: RequestOptionsArgs): Observable<Response> {
-        return super.delete(url, this.getRequestOptionArgs(options));
     }
 
     private beforeRequest() {
@@ -65,7 +54,7 @@ export class InterceptedHttp extends Http {
 
     private afterRequest() {
         document.getElementById('loading').style.display = 'none';
-        document.getElementById('content').style.filter = 'blur(0px)';
+        document.getElementById('content').style.filter = 'none';
         const links = document.getElementsByTagName('a');
         for (let i = 0; i < links.length; i++) {
             links[i]['style']['pointerEvents'] = 'auto';
@@ -84,29 +73,5 @@ export class InterceptedHttp extends Http {
             clickables[i]['style']['cursor'] = 'pointer';
         }
 
-    }
-
-    private getRequestOptionArgs(options?: RequestOptionsArgs): RequestOptionsArgs {
-
-        if (!options) {
-            options = new RequestOptions();
-        }
-
-        if (!options.headers) {
-            options.headers = new Headers();
-            options.headers.append('Content-Type', 'application/json');
-        }
-
-        const obj = JSON.parse(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY));
-        if (obj && obj.token) {
-            const tokenPrepared = `${obj.token.token_type} ${obj.token.access_token}`;
-            options.headers.append(LOCALSTORAGE_TOKEN_KEY, tokenPrepared);
-        }
-
-        if (options.headers.get('intercept')) {
-            options = null;
-        }
-
-        return options;
     }
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { SidebarService } from './sidebar.service';
+import { UtilService } from 'src/app/util/util.service';
+import { UserService } from 'src/app/services/user.service';
 
 
 @Component({
@@ -17,9 +19,17 @@ import { SidebarService } from './sidebar.service';
 })
 export class SidebarComponent implements OnInit {
   menus: any = [];
+  userName: string;
+  profile: any;
 
-  constructor(public sidebarservice: SidebarService) {
-    this.menus = sidebarservice.getMenuList();
+  constructor(
+    public sidebarservice: SidebarService,
+    @Inject(UserService) private userService: UserService,
+    @Inject(UtilService) private utilService: UtilService) {
+    
+      this.menus = sidebarservice.getMenuList();
+      this.userName = this.utilService.getName();
+      this.profile = this.utilService.getProfile().description;
   }
 
   ngOnInit() {
