@@ -1,10 +1,11 @@
-<h4 id="pageTitle">Cadastro de Empresa</h4>
+<h4 id="pageTitle"><i class="fas fa-building"></i> Cadastro de Empresa</h4>
 <hr>
 <div class="mt-5 tabbable-custom tab-style">
   <tabset>
     <tab class="tab-content">
-      <ng-template tabHeading >
-        <span class="tab-title" (click)="fetchNews($event)"><i class="fas fa-building"></i> Dados Gerais</span>
+      <ng-template tabHeading>
+        <span class="tab-title cursor-click font-header-tab" (click)="fetchNews($event)"><i class="fas fa-building"></i> Dados
+          Gerais</span>
       </ng-template>
       <form [formGroup]="formGeneralData">
         <div class="row">
@@ -49,7 +50,8 @@
               <div *ngIf="fgd.email.errors && (fgd.email.dirty || fgd.email.touched)">
                 <small class="d-flex justify-content-start text-danger" *ngIf="fgd.email.errors.required">Campo
                   obrigatório</small>
-                <small class="d-flex justify-content-start text-danger" *ngIf="fgd.email.errors.email">E-mail inválido</small>
+                <small class="d-flex justify-content-start text-danger" *ngIf="fgd.email.errors.email">E-mail
+                  inválido</small>
               </div>
             </div>
           </div>
@@ -74,14 +76,15 @@
     </tab>
     <tab class="tab-content">
       <ng-template tabHeading>
-        <span class="header-tab"><i class="fas fa-map-marker-alt"></i> Endereço</span>
+        <span class="header-tab cursor-click font-header-tab"><i class="fas fa-map-marker-alt"></i> Endereço</span>
       </ng-template>
       <address-register></address-register>
     </tab>
     <tab class="tab-content">
       <ng-template tabHeading>
-        <span class="header-tab"><i class="fas fa-phone-square"></i> Contatos</span>
-      </ng-template><contact-register></contact-register>
+        <span class="header-tab cursor-click font-header-tab"><i class="fas fa-phone-square"></i> Contatos</span>
+      </ng-template>
+      <contact-register></contact-register>
     </tab>
   </tabset>
 </div>

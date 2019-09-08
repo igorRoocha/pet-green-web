@@ -47,7 +47,7 @@ export const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface =
     InternalModule,
     ComponentsModule,
     HttpClientModule,
-    DirectiveModule,
+    DirectiveModule
   ],
   providers: [
     {

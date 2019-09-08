@@ -12,7 +12,7 @@ export const MODULE_COMPONENTS = [
     NavbarComponent,
     AddressRegisterComponent,
     ContactRegisterComponent,
-    NewContactComponent
+    NewContactComponent,
 ];
 
 export const MODULE_SERVICES_COMPONENTS = [

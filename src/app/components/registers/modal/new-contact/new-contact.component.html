@@ -6,21 +6,41 @@
     </button>
   </div>
   <div class="modal-body">
-    <form>
+    <form [formGroup]="fmContact">
       <div class="row">
         <div class="form-group col-md-3">
           <label>Tipo de Contato*</label>
+          <select class="custom-select" formControlName="contactType">
+            <option value="Telefone" selected>Telefone</option>
+            <option value="Celular">Celular</option>
+            <option value="WhatsApp">WhatsApp</option>
+            <option value="Outro">Outro</option>
+          </select>
+          <div *ngIf="fmContact.controls['contactType'].invalid  && (fmContact.controls['contactType'].dirty || fmContact.controls['contactType'].touched || invalid)">
+            <small class="d-flex justify-content-start text-danger"
+              *ngIf="fmContact.controls['contactType'].errors.required">Campo
+              obrigatório</small>
+          </div>
         </div>
         <div class="form-group col-md-6">
           <label>Número*</label>
-          <input type="text" placeholder="Número" maxlength="15" class="form-control" required telefone
-            autocomplete="off">
+          <input type="text" placeholder="Número" formControlName="number" maxlength="15" class="form-control" required
+            telefone autocomplete="off">
+          <div *ngIf="fmContact.controls['number'].invalid && (fmContact.controls['number'].dirty || fmContact.controls['number'].touched || invalid)">
+            <small class="d-flex justify-content-start text-danger"
+              *ngIf="fmContact.controls['number'].errors.required">Campo
+              obrigatório</small>
+              <small class="d-flex justify-content-start text-danger"
+              *ngIf="fmContact.controls['number'].errors.minlength">Número inválido</small>
+          </div>
         </div>
       </div>
     </form>
   </div>
-  <div class="modal-footer text-right footer">
-    <button class="btn btn-success btn-footer">Salvar</button>
-    <button class="btn btn-danger btn-footer ml-2">Cancelar</button>
+  <div class="modal-footer text-right footer md-8">
+    <button class="btn btn-success btn-footer" style="width: 85px;" (click)="save();"><i class="fas fa-check"
+        style="font-size: 0.8rem;"></i> Salvar</button>
+    <button class="btn btn-danger btn-footer ml-2" style="width: 85px;" (click)="bsModalRef.hide()"><i
+        class="far fa-window-close" style="font-size: 0.8rem;"></i> Fechar</button>
   </div>
 </div>

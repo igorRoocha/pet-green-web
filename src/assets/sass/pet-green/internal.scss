@@ -1,6 +1,17 @@
 input:focus {
   box-shadow: none;
   border: 1px solid #9a9a9a;
+  color: rgb(46, 46, 46);
+}
+
+select:focus {
+  box-shadow: none;
+  border: 1px solid #9a9a9a;
+  color: rgb(46, 46, 46);
+}
+
+input {
+  color: rgb(46, 46, 46);
 }
 
 :host ::ng-deep .tab-style a.nav-link {
@@ -9,5 +20,31 @@ input:focus {
 
 :host ::ng-deep .tab-style a.nav-link.active {
   border-top: 3px solid #28a745;
+  border: 1px solid #ddd;
+  border-bottom: none;
 }
 
+:host ::ng-deep .nav-tabs {
+  border-bottom: none;
+}
+
+.tab-content {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  border-top-left-radius: 0px;
+  padding: 1%;
+}
+
+:host ::ng-deep .modal-header {
+  background-color: rgb(247, 247, 247);
+}
+
+:host ::ng-deep .btn-primary {
+  color: #fff;
+  background-color: #1f8afc;
+  border-color: #1f8afc;
+}
+
+.ng-touched.ng-invalid:not(form)  {
+  border: 1px solid #e7432d;
+}

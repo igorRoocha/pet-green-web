@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { VIA_CEP } from 'dist/mouse-vet-med-web/assets/constants';
+import { VIA_CEP } from './../../assets/constants';
 import { UtilService } from '../util/util.service';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 
