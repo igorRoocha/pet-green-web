@@ -1,4 +1,5 @@
-import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { UtilService } from 'src/app/util/util.service';
+import { Component, OnInit, TemplateRef, ViewChild, Inject } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NewContactComponent } from '../modal/new-contact/new-contact.component';
 import { Observable } from 'rxjs';
@@ -14,23 +15,10 @@ export class ContactRegisterComponent implements OnInit {
   public contacts: any = [];
   @ViewChild(NewContactComponent) newContactComponent: NewContactComponent;
 
-  constructor(private modalService: BsModalService) { }
+  constructor(private modalService: BsModalService,
+              @Inject(UtilService) private utilService: UtilService) { }
 
   ngOnInit() {
-  }
-
-  private showNotification(icon, message, type) {
-    $['notify']({
-      icon: icon,
-      message: message
-    }, {
-        type: type,
-        delay: 2000,
-        placement: {
-          from: 'bottom',
-          align: 'center'
-        }
-      });
   }
 
   public edit(contact) {
@@ -52,14 +40,15 @@ export class ContactRegisterComponent implements OnInit {
       if (!contact) {
         if (found === undefined && contact === undefined) {
           this.contacts.push(res);
-          this.showNotification('fas fa-thumbs-up', 'Contato cadastrado com sucesso!', 'success');
+          this.utilService.showNotification('fas fa-thumbs-up', 'Contato cadastrado com sucesso!', 'success');
         } else {
-          this.showNotification('fas fa-exclamation-triangle', 'Este contato já existe.', 'warning');
+          this.utilService.showNotification('fas fa-exclamation-triangle', 'Este contato já existe.', 'warning');
         }
       } else {
         this.contacts.splice(this.contacts.findIndex(element => {
           return element.contactType === contact.contactType && element.number === contact.number;
         }), 1, res);
+        this.utilService.showNotification('fas fa-thumbs-up', 'Edição realizada com sucesso!', 'success');
       }
     });
   }

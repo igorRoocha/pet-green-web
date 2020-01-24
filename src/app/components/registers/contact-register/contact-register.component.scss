@@ -1,35 +1,3 @@
 table {
   width: 100%;
 }
-
-td {
-  color: rgb(46, 46, 46);
-  font-size: 10pt;
-}
-
-.header-table {
-  font-size: 10pt;
-  font-weight: bolder;
-  border-bottom: none;
-  border-top: none;
-}
-
-.empty-data-text {
-  background: rgb(248, 248, 248);
-  font-weight: bolder;
-  font-size: 10pt;
-}
-
-.icon-edit {
-  font-size: 1.2rem;
-  color: #1f8afc;
-}
-
-.icon-delete {
-  font-size: 1.2rem;
-  color: #e7432d;
-}
-
-td {
-  color: rgb(46, 46, 46) !important;
-}

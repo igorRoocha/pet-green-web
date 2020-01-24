@@ -9,9 +9,11 @@ import { DirectiveModule } from '../directive/directive.module';
 import { UtilModule } from '../util/util.module';
 import { RouterModule } from '@angular/router';
 import { MODULE_COMPONENTS, MODULE_SERVICES_COMPONENTS,  } from './components.route';
+import { TagInputModule } from 'ngx-chips';
 
 @NgModule({
     imports: [
+        TagInputModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
@@ -28,7 +30,7 @@ import { MODULE_COMPONENTS, MODULE_SERVICES_COMPONENTS,  } from './components.ro
         MODULE_COMPONENTS
     ],
     declarations: [
-        MODULE_COMPONENTS
+        MODULE_COMPONENTS,
     ],
     entryComponents: [
         MODULE_COMPONENTS

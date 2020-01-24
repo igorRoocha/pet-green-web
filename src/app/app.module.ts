@@ -2,11 +2,8 @@ import { AppBotstrapModule } from './app-bootstrap.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
-
 import { AppComponent } from './app.component';
-
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
 import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
@@ -22,6 +19,7 @@ import { ComponentsModule } from './components/components.module';
 import { DirectiveModule } from './directive/directive.module';
 import { routing } from './app.route';
 import { InterceptedHttp } from './util/http.interceptor';
+import { TagInputModule } from 'ngx-chips';
 
 export const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
@@ -35,6 +33,7 @@ export const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface =
     ExternalComponent
   ],
   imports: [
+    TagInputModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,

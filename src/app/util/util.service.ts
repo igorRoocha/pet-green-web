@@ -3,6 +3,7 @@ import { Http } from '@angular/http';
 import { Router } from '@angular/router';
 import { LOCALSTORAGE_TOKEN_KEY } from '../../assets/constants';
 import { RouteStack } from '../models/route-setack';
+import * as $ from "jquery";
 
 declare var swal: any;
 
@@ -491,5 +492,24 @@ export class UtilService {
     if (!this.stringIsNullOrEmpty(value)) {
       return value.replace(/[()-./ ]/g, '');
     }
+  }
+
+  public showNotification(icon, message, type) {
+    $['notify']({
+      icon: icon,
+      message: message
+    }, {
+        type: type,
+        delay: 2000,
+        placement: {
+          from: 'bottom',
+          align: 'center'
+        }
+      });
+  }
+
+  public arraysEqual(a1, a2) {
+    /* WARNING: arrays must not contain {objects} or behavior may be undefined */
+    return JSON.stringify(a1) === JSON.stringify(a2);
   }
 }

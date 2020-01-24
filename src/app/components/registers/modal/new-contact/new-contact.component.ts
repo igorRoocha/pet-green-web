@@ -2,7 +2,6 @@ import { UtilService } from './../../../../util/util.service';
 import { Component, OnInit, Input, Output, Inject, EventEmitter } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import * as $ from 'jquery';
 import 'bootstrap-notify';
 
 @Component({
@@ -14,10 +13,10 @@ export class NewContactComponent implements OnInit {
   public title;
   public invalid = false;
   public contact: any;
+  public answer: any;
 
   @Input('formGroup') fmContact: FormGroup;
   @Output('fmChanged') fmChanged = new EventEmitter();
-  public answer: any;
 
   constructor(
     public bsModalRef: BsModalRef,
