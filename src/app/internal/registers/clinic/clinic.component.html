@@ -1,0 +1,56 @@
+<h4 id="pageTitle"><i class="fas fa-building"></i> Cadastro de Empresa</h4>
+<hr>
+<div class="mt-5 tabbable-custom tab-style">
+  <tabset>
+    <tab class="tab-content">
+      <ng-template tabHeading>
+        <span class="tab-title cursor-click font-header-tab"><i class="fas fa-building"></i> Dados
+          Gerais</span>
+      </ng-template>
+      <clinic-register [invalidForm]="statusFormClinic" 
+                       (resComponent)="getValuesClinicRegisterForm($event)">
+      </clinic-register>
+    </tab>
+    <tab class="tab-content">
+      <ng-template tabHeading>
+        <span class="header-tab cursor-click font-header-tab"><i class="fas fa-map-marker-alt"></i> Endereço</span>
+      </ng-template>
+      <address-register [invalidForm]="statusFormAddress" 
+                        (resComponent)="getValuesAddressRegisterForm($event)">
+      </address-register>
+    </tab>
+    <tab class="tab-content">
+      <ng-template tabHeading>
+        <span class="header-tab cursor-click font-header-tab"><i class="fas fa-phone-square"></i> Contatos</span>
+      </ng-template>
+      <contact-register></contact-register>
+    </tab>
+    <tab class="tab-content">
+      <ng-template tabHeading>
+        <span class="header-tab cursor-click font-header-tab"><i class="fas fa-clock"></i> Horário de
+          Funcionamento</span>
+      </ng-template>
+      <schedules-register></schedules-register>
+    </tab>
+    <tab class="tab-content">
+      <ng-template tabHeading>
+        <span class="header-tab cursor-click font-header-tab"><i class="fas fa-image  "></i> Logotipo</span>
+      </ng-template>
+      <div class="row">
+        <div class="col-md-6">
+          <dropzone></dropzone>
+        </div>
+      </div>
+    </tab>
+  </tabset>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="d-flex justify-content-end">
+        <button type="button" class="btn btn-success cursor-click" (click)="save()">Salvar 
+          <i class="fas fa-check" style="font-size: 0.8rem;"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

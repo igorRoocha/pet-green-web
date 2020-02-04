@@ -23,8 +23,8 @@
         <td>{{ schedule.days }}</td>
         <td>{{ schedule.startHour }}</td>
         <td>{{ schedule.endHour }}</td>
-        <td style="text-align: right;"><i class="fas fa-edit icon-edit cursor-click" (click)="edit(schedule)"></i><i
-            class="fas fa-times-circle ml-2 icon-delete cursor-click" (click)="delete(schedule)"></i>
+        <td style="text-align: right;"><i class="fas fa-edit icon-edit cursor-click" (click)="edit(schedule)" tooltip="Editar Horário"></i><i
+            class="fas fa-times-circle ml-2 icon-delete cursor-click" (click)="delete(schedule)" tooltip="Excluir Horário"></i>
         </td>
       </tr>
     </tbody>

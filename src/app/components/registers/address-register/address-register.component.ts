@@ -10,8 +10,10 @@ import { HttpStatus } from 'src/app/models/enum/http-status.enum';
   styleUrls: ['./address-register.component.scss']
 })
 export class AddressRegisterComponent implements OnInit {
-  @Input('formGroup') formAddress: FormGroup;
-  @Output('formChanged') formChanged = new EventEmitter();
+  private formAddress: FormGroup;
+
+  @Input('invalidForm') invalidForm: boolean;
+  @Output('resComponent') resComponent = new EventEmitter();
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     @Inject(AddressService) private addressService: AddressService,
@@ -50,7 +52,7 @@ export class AddressRegisterComponent implements OnInit {
       });
 
       this.formAddress.valueChanges.subscribe(() => {
-        this.formChanged.emit(this.formAddress);
+        this.resComponent.emit(this.formAddress);
       });
     }
   }

@@ -6,6 +6,7 @@ $fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
 @import "~@fortawesome/fontawesome-free/scss/solid";
 @import "~@fortawesome/fontawesome-free/scss/regular";
 @import "~perfect-scrollbar/css/perfect-scrollbar.css";
+@import '~@sweetalert2/theme-bootstrap-4/bootstrap-4.scss';
 
 .page-wrapper.toggled .sidebar {
   left: -300px;

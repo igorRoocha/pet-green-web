@@ -25,10 +25,14 @@ export class SchedulesRegisterComponent implements OnInit {
   }
 
   public delete(schedule) {
-    const index = this.schedules.indexOf(schedule);
-    if (index > -1) {
-      this.schedules.splice(index, 1);
-    }
+    this.utilService.confirmMsg('Deseja realmente excluir o registro selecionado?', 'Excluir Horário', (result) => {
+      if (result.value) {
+        const index = this.schedules.indexOf(schedule);
+        if (index > -1) {
+          this.schedules.splice(index, 1);
+        }
+      }
+    });
   }
 
   public openModal(schedule) {
@@ -50,7 +54,7 @@ export class SchedulesRegisterComponent implements OnInit {
         // Salvando o item antigo em memória, pois se a edição não ser válida
         // o vetor tem que voltar para o seu estado original.
         const scheduleAux = this.schedules[index];
-        this.schedules.splice(index, 0);
+        this.schedules.splice(index, 1);
 
         if (!this.validateDays(res)) {
           // Substituindo o elemento antigo pelo elemento novo que foi editado.

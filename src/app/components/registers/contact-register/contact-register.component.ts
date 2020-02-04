@@ -16,7 +16,7 @@ export class ContactRegisterComponent implements OnInit {
   @ViewChild(NewContactComponent) newContactComponent: NewContactComponent;
 
   constructor(private modalService: BsModalService,
-              @Inject(UtilService) private utilService: UtilService) { }
+    @Inject(UtilService) private utilService: UtilService) { }
 
   ngOnInit() {
   }
@@ -26,10 +26,14 @@ export class ContactRegisterComponent implements OnInit {
   }
 
   public delete(contact) {
-    const index = this.contacts.indexOf(contact);
-    if (index > -1) {
-      this.contacts.splice(index, 1);
-    }
+    this.utilService.confirmMsg('Deseja realmente excluir o registro selecionado?', 'Excluir Contato', (result) => {
+      if (result.value) {
+        const index = this.contacts.indexOf(contact);
+        if (index > -1) {
+          this.contacts.splice(index, 1);
+        }
+      }
+    });
   }
 
   openModal(contact) {

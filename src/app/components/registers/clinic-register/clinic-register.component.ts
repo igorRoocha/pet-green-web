@@ -1,14 +1,16 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { UtilService } from './../../../util/util.service';
+import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { UtilService } from 'src/app/util/util.service';
 
 @Component({
-  selector: 'app-clinic-register',
+  selector: 'clinic-register',
   templateUrl: './clinic-register.component.html',
   styleUrls: ['./clinic-register.component.scss']
 })
 export class ClinicRegisterComponent implements OnInit {
-  public formGeneralData: FormGroup;
+  private formGeneralData: FormGroup;
+  @Input('invalidForm') invalidForm: boolean;
+  @Output('resComponent') resComponent = new EventEmitter();
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     @Inject(UtilService) private utilService: UtilService) { }
@@ -34,7 +36,17 @@ export class ClinicRegisterComponent implements OnInit {
       ]],
       socialReason: ['', [
 
+      ]],
+      site: ['', [
+
+      ]],
+      facebook: ['', [
+
       ]]
+    });
+
+    this.formGeneralData.valueChanges.subscribe(() => {
+      this.resComponent.emit(this.formGeneralData);
     });
   }
 

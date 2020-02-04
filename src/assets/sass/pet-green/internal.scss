@@ -3,28 +3,50 @@
 
 input:focus {
   box-shadow: none;
-  border: 1px solid $dark-gray;
+  border: 2px solid $primary-color;
   color: rgb(46, 46, 46);
 }
 
 select:focus {
   box-shadow: none;
-  border: 1px solid $dark-gray;
+  border: 2px solid $primary-color;
   color: rgb(46, 46, 46);
 }
 
 input {
   color: rgb(46, 46, 46);
+  font-size: 11pt;
 }
 
-:host ::ng-deep .tab-style a.nav-link {
-  border-bottom: none;
+label {
+  color: rgb(46, 46, 46);
+  font-size: 10pt;
+  font-weight: 600;
+}
+
+:host ::ng-deep .tab-style a.nav-link .font-header-tab {
+  color: $primary-color;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+:host ::ng-deep .nav-tabs a.nav-link.active {
+  .font-header-tab {
+    color: $black-hr;
+  }
+}
+
+:host ::ng-deep .nav-tabs .nav-link:hover {
+  .font-header-tab {
+    color: darken($primary-states-color, 5%);
+  }
+  border: none;
 }
 
 :host ::ng-deep .tab-style a.nav-link.active {
   border: 1px solid $medium-gray;
   border-bottom: none;
-  border-top: 4px solid #28a745;
+  border-top: 3px solid #28a745;
   border-top-left-radius: 8%;
   border-top-right-radius: 8%;
 }
@@ -50,6 +72,6 @@ input {
   border-color: #1f8afc;
 }
 
-.ng-touched.ng-invalid:not(form)  {
+.ng-touched.ng-invalid:not(form) {
   border: 1px solid $danger-color;
 }

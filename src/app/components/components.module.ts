@@ -10,9 +10,11 @@ import { UtilModule } from '../util/util.module';
 import { RouterModule } from '@angular/router';
 import { MODULE_COMPONENTS, MODULE_SERVICES_COMPONENTS,  } from './components.route';
 import { TagInputModule } from 'ngx-chips';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
     imports: [
+        NgxDropzoneModule,
         TagInputModule,
         BrowserModule,
         BrowserAnimationsModule,

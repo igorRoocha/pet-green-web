@@ -1,0 +1,12 @@
+@import '../components.component.scss';
+
+.description {
+    font-size: 16pt;
+    font-weight: 500;
+    color: $black-hr;
+}
+
+.icon {
+    font-size: 5rem; 
+    color: $default-states-color;
+}

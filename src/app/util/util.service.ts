@@ -4,8 +4,7 @@ import { Router } from '@angular/router';
 import { LOCALSTORAGE_TOKEN_KEY } from '../../assets/constants';
 import { RouteStack } from '../models/route-setack';
 import * as $ from "jquery";
-
-declare var swal: any;
+import swal from 'sweetalert2/src/sweetalert2.js';
 
 @Injectable()
 export class UtilService {
@@ -16,11 +15,12 @@ export class UtilService {
 
   private routeStack = [] as RouteStack[];
 
-  public errorMsg(msg: string = 'Ocorreu um erro desconhecido! Entre em contato com nossos administradores.', title = 'Erro',
-    callback: Function = () => {
+  public errorMsg(msg: string = 'Por favor, entre em contato com nossa equipe para resolvermos o problema o mais breve possível.',
+                  title = 'Ocorreu um erro durante o processo :(',
+                  callback: Function = () => {
     }): void {
     swal.fire({
-      title: title,
+      title,
       text: msg,
       type: 'error',
     }).then(callback);
@@ -500,7 +500,7 @@ export class UtilService {
       message: message
     }, {
         type: type,
-        delay: 2000,
+        delay: 3000,
         placement: {
           from: 'bottom',
           align: 'center'

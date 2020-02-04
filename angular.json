@@ -28,12 +28,10 @@
             ],
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
-              "./node_modules/sweetalert2/dist/sweetalert2.min.css",
               "src/assets/sass/pet-green.scss",
               "src/styles.scss"
             ],
             "scripts": [
-              "./node_modules/sweetalert2/dist/sweetalert2.min.js",
               "./node_modules/jquery/dist/jquery.min.js",
               "./node_modules/bootstrap/dist/js/bootstrap.js",
               "./node_modules/bootstrap-notify/bootstrap-notify.js"
