@@ -4,4 +4,8 @@ export class City {
     name: string;
     ibge: string;
     state: State;
+
+    public City() {
+        this.state = new State();
+    }
 }

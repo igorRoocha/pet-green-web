@@ -7,4 +7,8 @@ export class Address {
     neighborhood: string;
     complement: string;
     city: City;
+
+    public Address() {
+        this.city = new City();
+    }
 }

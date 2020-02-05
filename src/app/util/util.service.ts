@@ -202,10 +202,9 @@ export class UtilService {
 
   public validateCpfAndCnpj(value: string): boolean {
     if (!this.stringIsNullOrEmpty(value)) {
-      value = value.replace(/[^\d]+/g, '');
-      if (value.length === 11 && !this.validateCPF(value)) {
+      if (value.length === 14 && !this.validateCPF(value)) {
         return false;
-      } else if (value.length === 14 && !this.validateCNPJ(value)) {
+      } else if (value.length === 18 && !this.validateCNPJ(value)) {
         return false;
       }
     }
@@ -215,6 +214,7 @@ export class UtilService {
 
   public validateCNPJ(cnpj: any): boolean {
     cnpj = cnpj.replace(/[^\d]+/g, '');
+    console.log(cnpj);
     if (cnpj === '') {
       return false;
     }
@@ -248,7 +248,7 @@ export class UtilService {
       }
     }
     let result = sum % 11 < 2 ? 0 : 11 - sum % 11;
-    if (result !== digits.charAt(0)) {
+    if (result !== parseInt(digits.charAt(0))) {
       return false;
     }
     size = size + 1;
@@ -262,7 +262,7 @@ export class UtilService {
       }
     }
     result = sum % 11 < 2 ? 0 : 11 - sum % 11;
-    return result === digits.charAt(1);
+    return result === parseInt(digits.charAt(1));
   }
 
   public validateCPF(cpf: any): boolean {

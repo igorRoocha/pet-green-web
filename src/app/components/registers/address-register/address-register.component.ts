@@ -28,7 +28,7 @@ export class AddressRegisterComponent implements OnInit {
   formControls() {
     if (!this.formAddress) {
       this.formAddress = this.formBuilder.group({
-        postcode: ['', [
+        cep: ['', [
           Validators.required,
         ]],
         number: ['', [
@@ -61,7 +61,7 @@ export class AddressRegisterComponent implements OnInit {
     if (!this.utilService.stringIsNullOrEmpty(cep)) {
       this.addressService.consultCep(cep).subscribe((address: any) => {
         if (!!address.erro) {
-          this.fa.postcode.setErrors({ 'incorrect': true });
+          this.fa.cep.setErrors({ 'incorrect': true });
         } else {
           this.fa.city.setValue(address.localidade);
           this.fa.street.setValue(address.logradouro);
@@ -70,7 +70,7 @@ export class AddressRegisterComponent implements OnInit {
         }
       }, () => {
         if (HttpStatus.BAD_REQUEST) {
-          this.fa.postcode.setErrors({ 'incorrect': true });
+          this.fa.cep.setErrors({ 'incorrect': true });
         }
       });
     }

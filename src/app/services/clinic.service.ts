@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ClinicService {
-    private baseUrl = `${API_URL}Clinic/`;
+    private baseUrl = `${API_URL}clinic/`;
     private header;
 
     constructor(@Inject(HttpClient) private http: HttpClient,
@@ -18,6 +18,10 @@ export class ClinicService {
     }
 
     public register(clinic: Clinic) {
-        return this.http.post(`${this.baseUrl}register`, clinic).pipe(map(res => res));
+        return this.http.post(`${this.baseUrl}register`, clinic, this.header).pipe(map(res => res));
+    }
+
+    public getClinic() {
+        return this.http.get(`${this.baseUrl}getClinic`, this.header).pipe(map(res => res));
     }
 }

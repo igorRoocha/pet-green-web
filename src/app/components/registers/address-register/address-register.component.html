@@ -4,12 +4,12 @@
       <div class="col-md-4">
         <div class="form-group">
           <label>CEP*</label>
-          <input type="text" placeholder="CEP" maxlength="9" formControlName="postcode" (blur)="consultCep(fa.postcode.value)"
+          <input type="text" placeholder="CEP" maxlength="9" formControlName="cep" (blur)="consultCep(fa.cep.value)"
             class="form-control" cep required>
-          <div *ngIf="fa.postcode.errors && (fa.postcode.dirty || fa.postcode.touched || invalidForm)">
-            <small class="d-flex justify-content-start text-danger" *ngIf="fa.postcode.errors.required">Campo
+          <div *ngIf="fa.cep.errors && (fa.cep.dirty || fa.cep.touched || invalidForm)">
+            <small class="d-flex justify-content-start text-danger" *ngIf="fa.cep.errors.required">Campo
               obrigatório</small>
-            <small class="d-flex justify-content-start text-danger" *ngIf="fa.postcode.errors.incorrect">CEP
+            <small class="d-flex justify-content-start text-danger" *ngIf="fa.cep.errors.incorrect">CEP
               inválido</small>
           </div>
           <label>*Para o preenchimento automático do formulário, informe o CEP</label>

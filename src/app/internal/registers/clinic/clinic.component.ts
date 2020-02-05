@@ -1,3 +1,4 @@
+import { state } from '@angular/animations';
 import { HttpStatus } from './../../../models/enum/http-status.enum';
 import { ClinicService } from './../../../services/clinic.service';
 import { Address } from './../../../models/address';
@@ -7,6 +8,8 @@ import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { UtilService } from 'src/app/util/util.service';
 import { SchedulesRegisterComponent } from 'src/app/components/registers/schedules-register/schedules-register.component';
 import { DropzoneComponent } from 'src/app/components/dropzone/dropzone.component';
+import { State } from 'src/app/models/state';
+import { City } from 'src/app/models/city';
 
 @Component({
   selector: 'app-clinic',
@@ -15,7 +18,9 @@ import { DropzoneComponent } from 'src/app/components/dropzone/dropzone.componen
 })
 export class ClinicComponent implements OnInit {
   private clinic: Clinic;
-  private address: Address;
+  private address: Address = new Address();
+  private city: City = new City();
+  private state: State = new State();
   private invalidClinic: boolean;
   private invalidAddress: boolean;
   private statusFormClinic: boolean;
@@ -38,6 +43,8 @@ export class ClinicComponent implements OnInit {
 
   public getValuesAddressRegisterForm(res) {
     this.address = res.value;
+    this.city.name = res.value.city;
+    this.state.name = res.value.state;
     this.invalidAddress = res.invalid;
   }
 
@@ -59,9 +66,17 @@ export class ClinicComponent implements OnInit {
       return;
     }
 
+    this.setAddress();
     this.setClinic();
     this.register();
 
+  }
+
+  private setAddress() {
+    this.address.city = new City();
+    this.address.city.state = new State();
+    this.address.city = this.city;
+    this.address.city.state = this.state;
   }
 
   private setClinic() {
