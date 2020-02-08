@@ -21,6 +21,7 @@ export class UserService {
     }
 
     public post(user) {
+        console.log(user);
         return this.http.post(`${this.baseUrl}`, user).pipe();
     }
 

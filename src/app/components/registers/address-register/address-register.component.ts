@@ -48,7 +48,9 @@ export class AddressRegisterComponent implements OnInit {
         ]],
         complement: ['', [
 
-        ]]
+        ]],
+        ibge: ['',[]],
+        uf: ['',[]]
       });
 
       this.formAddress.valueChanges.subscribe(() => {
@@ -67,6 +69,8 @@ export class AddressRegisterComponent implements OnInit {
           this.fa.street.setValue(address.logradouro);
           this.fa.state.setValue(this.utilService.convertStates(address.uf));
           this.fa.neighborhood.setValue(address.bairro);
+          this.fa.ibge.setValue(address.ibge);
+          this.fa.uf.setValue(address.uf);
         }
       }, () => {
         if (HttpStatus.BAD_REQUEST) {

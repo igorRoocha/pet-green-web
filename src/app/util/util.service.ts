@@ -214,7 +214,6 @@ export class UtilService {
 
   public validateCNPJ(cnpj: any): boolean {
     cnpj = cnpj.replace(/[^\d]+/g, '');
-    console.log(cnpj);
     if (cnpj === '') {
       return false;
     }

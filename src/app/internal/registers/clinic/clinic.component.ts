@@ -43,8 +43,13 @@ export class ClinicComponent implements OnInit {
 
   public getValuesAddressRegisterForm(res) {
     this.address = res.value;
+
     this.city.name = res.value.city;
+    this.city.ibge = res.value.ibge;
+
     this.state.name = res.value.state;
+    this.state.uf = res.value.uf;
+
     this.invalidAddress = res.invalid;
   }
 
@@ -95,12 +100,16 @@ export class ClinicComponent implements OnInit {
     let msg;
     let title;
     this.clinicService.register(this.clinic).subscribe((c: any) => {
-
+      this.utilService.successMsg('Cadastrado com sucesso!', () => {});
     }, err => {
       if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND) {
         title = 'Ocorreu um erro durante o cadastro de empresa :(';
         msg = 'Por favor, entre em contato com nossa equipe para resolvermos o problema o mais breve possível.';
         this.utilService.errorMsg(msg, title, () => { });
+      }
+
+      if (err.status === HttpStatus.CONFLICT) {
+        this.utilService.alertMsg('Foi encontrado um cadastro no sistema com o mesmo CPF/CNPJ.', () => {});
       }
     });
   }

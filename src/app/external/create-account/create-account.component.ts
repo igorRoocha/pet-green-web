@@ -71,7 +71,7 @@ export class CreateAccountComponent implements OnInit {
     }
 
     let user = this.formAccountRegister.value;
-    user.contact = this.utilService.removeMasks(this.f.contact.value);
+    user.contacts = [ { number: this.utilService.removeMasks(this.f.contact.value) } ];
 
     this.userService.post(user).subscribe((x: any) => {
       this.utilService.successMsg('Cadastro realizado com sucesso! Faça o login para continuar', () => {
