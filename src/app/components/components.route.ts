@@ -1,3 +1,6 @@
+import { SpecieService } from './../services/registers/species.service';
+import { SpeciesRegisterComponent } from './registers/species-register/species-register.component';
+import { NewSpeciesComponent } from './registers/modal/new-species/new-species.component';
 import { DropzoneComponent } from './dropzone/dropzone.component';
 import { ContactRegisterComponent } from './registers/contact-register/contact-register.component';
 import { AddressService } from './../services/address.service';
@@ -20,9 +23,12 @@ export const MODULE_COMPONENTS = [
     NewContactComponent,
     SchedulesRegisterComponent,
     NewScheduleComponent,
-    DropzoneComponent
+    NewSpeciesComponent,
+    DropzoneComponent,
+    SpeciesRegisterComponent
 ];
 
 export const MODULE_SERVICES_COMPONENTS = [
-    AddressService
+    AddressService,
+    SpecieService
 ];

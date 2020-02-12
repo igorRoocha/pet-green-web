@@ -34,11 +34,16 @@ export class SidebarService {
       },
       submenus: [
         {
-          title: 'Clínica / Consultório',
-          path: 'app/cadastrar-empresa'
+          title: 'Empresa',
+          path: 'app/cadastro-empresa'
         },
         {
-          title: 'Espécies / Raças'
+          title: 'Espécies',
+          path: 'app/cadastro-especie'
+        },
+        {
+          title: 'Raças',
+          path: 'app/cadastro-raca'
         },
         {
           title: 'Fornecedores'

@@ -1,3 +1,4 @@
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Inject, Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { Router } from '@angular/router';
@@ -510,5 +511,22 @@ export class UtilService {
   public arraysEqual(a1, a2) {
     /* WARNING: arrays must not contain {objects} or behavior may be undefined */
     return JSON.stringify(a1) === JSON.stringify(a2);
+  }
+
+  public getConfirmSubscriber(modalRef: BsModalRef, modalService: BsModalService) {
+    return (observer) => {
+      const subscription = modalService.onHidden.subscribe(() => {
+        if (modalRef.content.answer !== undefined && modalRef.content.answer !== null) {
+          observer.next(modalRef.content.answer);
+        }
+        observer.complete();
+      });
+
+      return {
+        unsubscribe() {
+          subscription.unsubscribe();
+        }
+      };
+    };
   }
 }

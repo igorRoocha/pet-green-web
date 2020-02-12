@@ -26,7 +26,7 @@ export class SidebarComponent implements OnInit {
     public sidebarservice: SidebarService,
     @Inject(UserService) private userService: UserService,
     @Inject(UtilService) private utilService: UtilService) {
-    
+
       this.menus = sidebarservice.getMenuList();
       this.userName = this.utilService.getName();
       this.profile = this.utilService.getProfile().description;
@@ -62,6 +62,10 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  toggleBackgroundImage() {
+    this.sidebarservice.hasBackgroundImage = !this.sidebarservice.hasBackgroundImage;
+  }
+
   redirect(currentMenu) {
     if (currentMenu.path) {
       window.location.href = currentMenu.path;
@@ -75,6 +79,11 @@ export class SidebarComponent implements OnInit {
     } else {
       return 'up';
     }
+  }
+
+
+  hideSidebar() {
+    this.sidebarservice.setSidebarState(true);
   }
 
   hasBackgroundImage() {

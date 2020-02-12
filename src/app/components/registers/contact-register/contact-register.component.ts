@@ -16,7 +16,7 @@ export class ContactRegisterComponent implements OnInit {
   @ViewChild(NewContactComponent) newContactComponent: NewContactComponent;
 
   constructor(private modalService: BsModalService,
-    @Inject(UtilService) private utilService: UtilService) { }
+              @Inject(UtilService) private utilService: UtilService) { }
 
   ngOnInit() {
   }

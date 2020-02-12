@@ -54,10 +54,9 @@ export class ClinicComponent implements OnInit {
   }
 
   public save() {
-    let alertMsg;
+    const alertMsg = 'Verifique se os formulários de cadastro preenchidos corretamente!';
 
     if (this.invalidClinic || this.invalidAddress || this.address === undefined) {
-      alertMsg = 'Verifique se os formulários "Dados Gerais" e "Endereço" estão preenchidos corretamente.';
 
       this.statusFormClinic = this.invalidClinic;
       this.statusFormAddress = this.invalidAddress;
@@ -66,7 +65,6 @@ export class ClinicComponent implements OnInit {
       return;
     } else if ((this.schedulesRegisterComponent.schedules === undefined || this.schedulesRegisterComponent.schedules.length === 0) ||
       (this.contactRegisterComponent.contacts === undefined || this.contactRegisterComponent.contacts.length === 0)) {
-      alertMsg = 'Verifique se os formulários "Contatos" e "Horário de Funcionamento" estão preenchidos corretamente.';
       this.utilService.showNotification('fas fa-exclamation-triangle', alertMsg, 'warning');
       return;
     }
