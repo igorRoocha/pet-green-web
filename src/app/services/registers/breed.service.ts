@@ -3,11 +3,11 @@ import { API_URL } from 'src/assets/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UtilService } from 'src/app/util/util.service';
 import { map } from 'rxjs/operators';
-import { Specie } from 'src/app/models/registers/specie';
+import { Breed } from 'src/app/models/registers/breed';
 
 @Injectable()
-export class SpecieService {
-    private baseUrl = `${API_URL}specie/`;
+export class BreedService {
+    private baseUrl = `${API_URL}breed/`;
     private header;
 
     constructor(@Inject(HttpClient) private http: HttpClient,
@@ -17,16 +17,16 @@ export class SpecieService {
         });
     }
 
-    public register(specie: Specie) {
-        return this.http.post(`${this.baseUrl}register`, specie, this.header).pipe(map(res => res));
+    public register(breed: Breed) {
+        return this.http.post(`${this.baseUrl}register`, breed, this.header).pipe(map(res => res));
     }
 
     public get() {
         return this.http.get(`${this.baseUrl}`, this.header).pipe(map(res => res));
     }
 
-    public edit(specie: Specie) {
-        return this.http.put(`${this.baseUrl}`, specie, this.header).pipe(map(res => res));
+    public edit(breed: Breed) {
+        return this.http.put(`${this.baseUrl}`, breed, this.header).pipe(map(res => res));
     }
 
     public delete(id: string) {

@@ -11,7 +11,6 @@ import { RouterModule } from '@angular/router';
 import { MODULE_COMPONENTS, MODULE_SERVICES_COMPONENTS,  } from './components.route';
 import { TagInputModule } from 'ngx-chips';
 import { NgxDropzoneModule } from 'ngx-dropzone';
-import { SpeciesRegisterComponent } from './registers/species-register/species-register.component';
 
 @NgModule({
     imports: [
@@ -34,7 +33,6 @@ import { SpeciesRegisterComponent } from './registers/species-register/species-r
     ],
     declarations: [
         MODULE_COMPONENTS,
-        SpeciesRegisterComponent,
     ],
     entryComponents: [
         MODULE_COMPONENTS

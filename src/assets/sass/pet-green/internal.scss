@@ -76,11 +76,53 @@ label {
   border: 1px solid $danger-color;
 }
 
-table {
-  width: 100%;
+.shadow-card {
+  height: 480px;
 }
 
-.shadow-card {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);        
-  height: 480px;
+.shadow-card:hover {
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.08), 0 0 15px 0 rgba(0,0,0,.02), 0 0 20px 4px rgba(0,0,0,.06);        
+}
+
+thead .header-table {
+  font-weight: 700;
+}
+
+table {
+  width: 100%;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.08), 0 0 15px 0 rgba(0,0,0,.02), 0 0 20px 4px rgba(0,0,0,.06);        
+}
+
+tbody>tr:nth-child(odd) {
+  background-color: $table-line-color;
+}
+
+tbody>tr:nth-child(even) {
+  background-color: $white-color;
+}
+
+.table-hover>tbody>tr:hover {
+  cursor: pointer;
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.08), 0 0 15px 0 rgba(0,0,0,.02), 0 0 20px 4px rgba(0,0,0,.06);        
+}
+
+table td {
+  border-left: 1px solid $background-lighter-grey;
+  border-right: 1px solid $background-lighter-grey;
+}
+
+table td:first-child {
+  border-left: none;
+}
+
+table td:last-child {
+  border-right: none;
+}
+
+.cursor-default {
+  cursor: default;
+}
+
+.cursor-click {
+  cursor: pointer;
 }

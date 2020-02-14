@@ -12,13 +12,13 @@
       </div>
       <div class="col-md-2">
         <div class="form-group">
-          <label>CPF / CNPJ*</label>
-          <input type="text" placeholder="CPF / CNPJ" (blur)="validateTaxId(fgd.taxId.value)" class="form-control"
-            maxlength="18" formControlName="taxId" cpf-cnpj required>
+          <label>CNPJ*</label>
+          <input type="text" placeholder="CNPJ" (blur)="validateTaxId(fgd.taxId.value)" class="form-control"
+            maxlength="18" formControlName="taxId" cnpj required>
           <div *ngIf="fgd.taxId.errors && (fgd.taxId.dirty || fgd.taxId.touched || invalidForm)">
             <small class="d-flex justify-content-start text-danger" *ngIf="fgd.taxId.errors.required">Campo
               obrigatório</small>
-            <small class="d-flex justify-content-start text-danger" *ngIf="fgd.taxId.errors.invalid">CPF / CNPJ
+            <small class="d-flex justify-content-start text-danger" *ngIf="fgd.taxId.errors.invalid">CNPJ
               inválido</small>
           </div>
         </div>

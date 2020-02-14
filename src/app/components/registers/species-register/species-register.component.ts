@@ -17,8 +17,8 @@ export class SpeciesRegisterComponent implements OnInit {
   public species: any = [];
 
   constructor(private modalService: BsModalService,
-              @Inject(UtilService) private utilService: UtilService,
-              @Inject(SpecieService) private specieService: SpecieService) { }
+    @Inject(UtilService) private utilService: UtilService,
+    @Inject(SpecieService) private specieService: SpecieService) { }
 
   ngOnInit() {
     this.getSpecies();
@@ -45,10 +45,26 @@ export class SpeciesRegisterComponent implements OnInit {
   }
 
   public delete(specie) {
+    let title;
+    let msg;
+
     this.utilService.confirmMsg('Deseja realmente excluir o registro selecionado?', 'Excluir Espécie', (result) => {
       if (result.value) {
         const index = this.species.indexOf(specie);
         if (index > -1) {
+          if (specie.id) {
+            this.specieService.delete(specie.id).subscribe(() => {
+              this.utilService.showNotification('far fa-check-circle', 'Removido com sucesso!', 'success');
+            }, err => {
+              if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND
+                || err.status === HttpStatus.INTERNAL_SERVER_ERROR) {
+                title = 'Ocorreu um erro durante a exclusão da espécie :(';
+                msg = 'Por favor, entre em contato com nossa equipe para resolvermos o problema o mais breve possível.';
+                this.utilService.errorMsg(msg, title, () => { });
+                console.log(err);
+              }
+            });
+          }
           this.species.splice(index, 1);
         }
       }
@@ -62,14 +78,16 @@ export class SpeciesRegisterComponent implements OnInit {
       if (!specie) {
         if (found === undefined && specie === undefined) {
           this.species.push(res);
+          this.getSpecies();
           this.utilService.showNotification('fas fa-thumbs-up', 'Espécie cadastrada com sucesso!', 'success');
         } else {
           this.utilService.showNotification('fas fa-exclamation-triangle', 'Essa espécie já existe.', 'warning');
         }
       } else {
         this.species.splice(this.species.findIndex(element => {
-          return element.contactType === specie.contactType && element.number === specie.number;
+          return element.name === specie.name;
         }), 1, res);
+        this.getSpecies();
         this.utilService.showNotification('fas fa-thumbs-up', 'Edição realizada com sucesso!', 'success');
       }
     });

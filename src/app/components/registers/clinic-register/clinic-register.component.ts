@@ -51,7 +51,7 @@ export class ClinicRegisterComponent implements OnInit {
   }
 
   public validateTaxId(taxId: string) {
-    if (!this.utilService.stringIsNullOrEmpty(taxId) && !this.utilService.validateCpfAndCnpj(taxId)) {
+    if (!this.utilService.stringIsNullOrEmpty(taxId) && !this.utilService.validateCNPJ(taxId)) {
       this.fgd.taxId.setErrors({ 'invalid': true });
     }
   }

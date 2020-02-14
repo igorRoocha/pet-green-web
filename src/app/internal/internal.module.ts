@@ -34,7 +34,7 @@ registerLocaleData(localePT);
         MODULE_COMPONENTS_INTERNAL
     ],
     declarations: [
-        MODULE_COMPONENTS_INTERNAL,
+        MODULE_COMPONENTS_INTERNAL
     ],
     entryComponents: [
         MODULE_COMPONENTS_INTERNAL,

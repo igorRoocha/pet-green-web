@@ -1,3 +1,4 @@
+import { BreedService } from './../services/registers/breed.service';
 import { SpecieService } from './../services/registers/species.service';
 import { SpeciesRegisterComponent } from './registers/species-register/species-register.component';
 import { NewSpeciesComponent } from './registers/modal/new-species/new-species.component';
@@ -12,8 +13,11 @@ import { NewContactComponent } from './registers/modal/new-contact/new-contact.c
 import { SchedulesRegisterComponent } from './registers/schedules-register/schedules-register.component';
 import { NewScheduleComponent } from './registers/modal/new-schedule/new-schedule.component';
 import { ClinicRegisterComponent } from './registers/clinic-register/clinic-register.component';
+import { BreedRegisterComponent } from './registers/breed-register/breed-register.component';
+import { NewBreedComponent } from './registers/modal/new-breed/new-breed.component';
 
 export const MODULE_COMPONENTS = [
+    BreedRegisterComponent,
     ClinicRegisterComponent,
     SidebarComponent,
     DashboardComponent,
@@ -25,10 +29,12 @@ export const MODULE_COMPONENTS = [
     NewScheduleComponent,
     NewSpeciesComponent,
     DropzoneComponent,
-    SpeciesRegisterComponent
+    SpeciesRegisterComponent,
+    NewBreedComponent
 ];
 
 export const MODULE_SERVICES_COMPONENTS = [
     AddressService,
-    SpecieService
+    BreedService,
+    SpecieService,
 ];
