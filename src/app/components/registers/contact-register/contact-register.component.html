@@ -1,0 +1,30 @@
+<div class="d-flex justify-content-start">
+  <button class="btn btn-primary click mt-2" (click)="openModal()">
+    Novo Contato <i class="fas fa-plus" style="font-size: 0.7rem;"></i>
+  </button>
+</div>
+<div class="mt-3">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="header-table">Número</th>
+        <th scope="col" class="header-table">Tipo</th>
+        <th scope="col" class="header-table"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="contacts.length === 0">
+        <td colspan="5" class="empty-data-text">
+          Você não possui contatos cadastrados.
+        </td>
+      </tr>
+      <tr *ngFor="let contact of contacts">
+        <td>{{ contact.number }}</td>
+        <td colspan="5">{{ contact.contactType }}</td>
+        <td style="text-align: right;"><i class="fas fa-edit icon-edit cursor-click" (click)="edit(contact)" tooltip="Editar Contato"></i><i
+            class="fas fa-times-circle ml-2 icon-delete cursor-click" (click)="delete(contact)" tooltip="Excluir Contato"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

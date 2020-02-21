@@ -1,0 +1,67 @@
+<div>
+  <div class="modal-header">
+    <h4 id="pageTitle" class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body d-flex justify-content-center">
+    <form [formGroup]="fmSchedules">
+      <div class="row">
+        <div class="col-md-12">
+          <label>Dia(s) de Funcionamento*</label>
+          <tag-input [ngModel]="itemsAdded" [maxItems]="7" [ngModelOptions]="{standalone: true}" [theme]="'foundation-theme'" 
+                     [onlyFromAutocomplete]="true" (onblur)="validateInputTagIsEmpty($event)" 
+                     (onAdd)="onAddedTagInput($event)" (onRemove)="onRemoveTagInput($event)">
+            <tag-input-dropdown [appendToBody]="false" 
+                                [autocompleteItems]="itemsTagInput">
+            </tag-input-dropdown>
+          </tag-input>
+          <div *ngIf="tagInputIsEmpty">
+            <small class="d-flex justify-content-start text-danger">Campo obrigatório</small>
+          </div>
+        </div>
+      </div>
+      <div class="row mt-3 d-flex justify-content-center">
+        <div class="col-md-6">
+          <label>Início*</label>
+          <input type="text" placeholder="Horário Inicial" formControlName="startHour" minlength="5" maxlength="5"
+            class="form-control" required autocomplete="off" hour>
+          <div
+            *ngIf="fmSchedules.controls['startHour'].invalid  && (fmSchedules.controls['startHour'].dirty || fmSchedules.controls['startHour'].touched || invalid)">
+            <small class="d-flex justify-content-start text-danger"
+              *ngIf="fmSchedules.controls['startHour'].errors.required">Campo
+              obrigatório</small>
+          </div>
+          <div
+            *ngIf="fmSchedules.controls['startHour'].invalid  && (fmSchedules.controls['startHour'].dirty || fmSchedules.controls['startHour'].touched || invalid)">
+            <small class="d-flex justify-content-start text-danger"
+              *ngIf="fmSchedules.controls['startHour'].errors.minlength">O campo deve ter no mínimo 5 caracteres</small>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <label>Final*</label>
+          <input type="text" placeholder="Horário Final" minlength="5" formControlName="endHour" maxlength="5"
+            class="form-control" required autocomplete="off" hour>
+            <div
+            *ngIf="fmSchedules.controls['endHour'].invalid  && (fmSchedules.controls['endHour'].dirty || fmSchedules.controls['endHour'].touched || invalid)">
+            <small class="d-flex justify-content-start text-danger"
+              *ngIf="fmSchedules.controls['endHour'].errors.required">Campo
+              obrigatório</small>
+          </div>
+          <div
+            *ngIf="fmSchedules.controls['endHour'].invalid  && (fmSchedules.controls['endHour'].dirty || fmSchedules.controls['endHour'].touched || invalid)">
+            <small class="d-flex justify-content-start text-danger"
+              *ngIf="fmSchedules.controls['endHour'].errors.minlength">O campo deve ter no mínimo 5 caracteres</small>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer text-right footer md-8">
+    <button class="btn btn-success btn-footer" style="width: 85px;" (click)="save();">Salvar <i class="fas fa-check"
+      style="font-size: 0.8rem;"></i></button>
+    <button class="btn btn-danger btn-footer ml-2" style="width: 85px;" (click)="bsModalRef.hide()">Fechar <i
+      class="far fa-window-close" style="font-size: 0.8rem;"></i></button>
+  </div>
+</div>

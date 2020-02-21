@@ -1,3 +1,4 @@
+import { CpfDirective } from './cpf.directive';
 import { TelefoneFilter } from './telefone-filter';
 import { CpfFilter } from './cpf-filter';
 import { HourDirective } from './hour.directive';
@@ -18,6 +19,7 @@ import { RgFilter } from './rg-filter';
     CepDirective,
     CnpjDirective,
     CpfCnpjDirective,
+    CpfDirective,
     CpfFilter,
     CurrencyFormatPipe,
     DateDirective,
@@ -32,6 +34,7 @@ import { RgFilter } from './rg-filter';
     CepDirective,
     CnpjDirective,
     CpfCnpjDirective,
+    CpfDirective,
     CpfFilter,
     CurrencyFormatPipe,
     DateDirective,

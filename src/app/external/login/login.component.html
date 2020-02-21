@@ -3,30 +3,30 @@
         <div class="row">
             <div class="login-container col-lg-4 col-md-6 col-sm-8 col-xs-12">
                 <div class="login-title text-center">
-                    <h2><span>Mouse<strong> Soluções</strong></span></h2>
                 </div>
-                <div class="login-content">
-                    <div class="login-header ">
+                <div class="login-content" style="margin-top: 20%;">
+                    <div class="login-header">
                         <h3><strong>Bem-vindo(a),</strong></h3>
-                        <h5>Aproveite o sistema e tenha todas as informações sob seu controle.</h5>
+                        <h5>O Pet Green oferece um gerenciamento simples e eficaz para o seu negócio.</h5>
                     </div>
                     <div class="login-body">
                         <form role="form" [formGroup]="formLogin" action="" method="post" class="login-form">
                             <div class="form-group ">
                                 <div class="pos-r">
                                     <input formControlName="email" type="text" placeholder="Email"
-                                        class="form-username form-control" required autofocus>
+                                        class="form-username form-control" required>
                                     <i class="fa fa-user"></i>
                                 </div>
                                 <div *ngIf="f.email.errors && (f.email.dirty || f.email.touched)">
                                     <div *ngIf="f.email.errors.required" class="error">Campo obrigatório</div>
                                     <div *ngIf="f.email.errors.email" class="error">E-mail inválido</div>
+                                    <div *ngIf="f.email.errors.cannotFoundAccount" class="error">Essa conta não possui cadastro</div>
                                 </div>
                             </div>
                             <div class="form-group">
                                 <div class="pos-r">
                                     <input id="form-password" type="password" formControlName="password"
-                                        name="form-password" placeholder="Senha" class="form-password form-control">
+                                        name="form-password" placeholder="Senha" class="form-password form-control" required autocomplete="off">
                                     <i class="fa fa-lock"></i>
                                 </div>
                                 <div *ngIf="f.password.errors && (f.password.dirty || f.password.touched)">
@@ -36,9 +36,12 @@
                             <div class="form-group text-right">
                                 <a href="#" class="bold"> Esqueceu sua senha?</a>
                             </div>
+                            <div class="d-flex justify-content-center mb-3">
+                                <strong class="error bold" style="font-size: 13pt;" *ngIf="unauthorized">E-mail ou senha inválidos!</strong>
+                            </div>
 
                             <div class="form-group">
-                                <button type="submit" class="btn btn-primary col-lg-12"><strong>Entrar</strong></button>
+                                <button type="submit" class="btn btn-primary col-lg-12 click" (click)="login()"><strong>Entrar</strong></button>
                             </div>
 
                         </form>

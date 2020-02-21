@@ -1,0 +1,32 @@
+<div class="d-flex justify-content-start">
+  <button class="btn btn-primary click mt-2" (click)="openModal()">
+    Novo Horário <i class="fas fa-plus" style="font-size: 0.7rem;"></i>
+  </button>
+</div>
+<div class="mt-3">
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col" class="header-table">Dia(s)</th>
+        <th scope="col" class="header-table">Horário Inicial</th>
+        <th scope="col" class="header-table">Horário Final</th>
+        <th scope="col" class="header-table"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngIf="schedules.length === 0">
+        <td colspan="5" class="empty-data-text">
+          Você não possui horários cadastrados.
+        </td>
+      </tr>
+      <tr *ngFor="let schedule of schedules">
+        <td>{{ schedule.days }}</td>
+        <td>{{ schedule.startHour }}</td>
+        <td>{{ schedule.endHour }}</td>
+        <td style="text-align: right;"><i class="fas fa-edit icon-edit cursor-click" (click)="edit(schedule)" tooltip="Editar Horário"></i><i
+            class="fas fa-times-circle ml-2 icon-delete cursor-click" (click)="delete(schedule)" tooltip="Excluir Horário"></i>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

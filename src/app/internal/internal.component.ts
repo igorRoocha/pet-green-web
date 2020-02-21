@@ -8,7 +8,6 @@ import { SidebarService } from '../components/sidebar/sidebar.service';
 })
 export class InternalComponent implements OnInit {
 
-  title = '';
   constructor(public sidebarservice: SidebarService) { }
 
   ngOnInit() {
@@ -19,16 +18,8 @@ export class InternalComponent implements OnInit {
     this.sidebarservice.setSidebarState(!this.sidebarservice.getSidebarState());
   }
 
-  toggleBackgroundImage() {
-    this.sidebarservice.hasBackgroundImage = !this.sidebarservice.hasBackgroundImage;
-  }
-
   getSideBarState() {
     return this.sidebarservice.getSidebarState();
-  }
-
-  hideSidebar() {
-    this.sidebarservice.setSidebarState(true);
   }
 }
 

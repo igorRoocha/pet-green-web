@@ -34,13 +34,16 @@ export class SidebarService {
       },
       submenus: [
         {
-          title: 'Classificações cliente'
+          title: 'Empresa',
+          path: 'app/cadastro-empresa'
         },
         {
-          title: 'Clínica / Consultório'
+          title: 'Espécies',
+          path: 'app/cadastro-especie'
         },
         {
-          title: 'Espécies / Raças'
+          title: 'Raças',
+          path: 'app/cadastro-raca'
         },
         {
           title: 'Fornecedores'
@@ -74,9 +77,6 @@ export class SidebarService {
         },
         {
           title: 'Vacinas'
-        },
-        {
-          title: 'Vias de administração'
         }
       ]
     },

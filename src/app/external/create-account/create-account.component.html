@@ -1,5 +1,4 @@
 <div class="image-background-create-account">
-    <navbar [external]="true"></navbar>
     <div class="create-account-content">
         <div class="container">
             <div class="row">
@@ -78,12 +77,14 @@
                                             aria-describedby="basic-addon2" type="email" placeholder="Email"
                                             (focus)="focusEmail=true" (blur)="focusEmail=false">
                                     </div>
-                                    <div *ngIf="f.email.errors  && (f.email.dirty || f.email.touched)">
+                                    <div *ngIf="f.email.errors && (f.email.dirty || f.email.touched)">
                                         <small class="d-flex justify-content-start text-danger"
                                             *ngIf="f.email.errors.required">Campo
                                             obrigatório</small>
                                         <small class="d-flex justify-content-start text-danger"
                                             *ngIf="f.email.errors.email">E-mail inválido</small>
+                                        <small class="d-flex justify-content-start text-danger"
+                                            *ngIf="f.email.errors.userFound">O e-mail informado já existe</small>
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -97,7 +98,7 @@
                                             placeholder="Telefone para contato" (focus)="focusContact=true"
                                             (blur)="focusContact=false" maxlength="15" required telefone>
                                     </div>
-                                    <div *ngIf="f.contact.errors  && (f.contact.dirty || f.contact.touched)">
+                                    <div *ngIf="f.contact.errors && (f.contact.dirty || f.contact.touched)">
                                         <small class="d-flex justify-content-start text-danger"
                                             *ngIf="f.contact.errors.required">Campo
                                             obrigatório</small>
@@ -111,9 +112,10 @@
                                         </div>
                                         <input class="form-control" formControlName="password"
                                             aria-describedby="basic-addon2" type="password" placeholder="Senha"
-                                            (focus)="focusPassword=true" (blur)="focusPassword=false">
+                                            (focus)="focusPassword=true" (blur)="focusPassword=false"
+                                            autocomplete="off">
                                     </div>
-                                    <div *ngIf="f.password.errors  && (f.password.dirty || f.password.touched)">
+                                    <div *ngIf="f.password.errors && (f.password.dirty || f.password.touched)">
                                         <small class="d-flex justify-content-start text-danger"
                                             *ngIf="f.password.errors.required">Campo
                                             obrigatório</small>
@@ -126,22 +128,26 @@
                                             <span class="input-group-text" id="basic-addon2">
                                                 <i class="fas fa-lock"></i></span>
                                         </div>
-                                        <input class="form-control" formControlName="confirmPassword" (blur)="validateConfirmPassword()"
-                                            aria-describedby="basic-addon2" type="password"
+                                        <input class="form-control" formControlName="confirmPassword"
+                                            (blur)="confirmPassword()" aria-describedby="basic-addon2" type="password"
                                             placeholder="Confirmar Senha" (focus)="focusConfirmPassword=true"
-                                            (blur)="focusConfirmPassword=false">
+                                            (blur)="focusConfirmPassword=false" autocomplete="off">
                                     </div>
                                     <div
-                                        *ngIf="f.confirmPassword.errors  && (f.confirmPassword.dirty || f.confirmPassword.touched)">
+                                        *ngIf="f.confirmPassword.errors && (f.confirmPassword.dirty || f.confirmPassword.touched)">
                                         <small class="d-flex justify-content-start text-danger"
                                             *ngIf="f.confirmPassword.errors.required">Campo
                                             obrigatório</small>
                                         <small class="d-flex justify-content-start text-danger"
-                                            *ngIf="f.confirmPassword.errors.incorrect">As senhas não correspondem</small>
+                                            *ngIf="f.confirmPassword.errors.incorrect">As senhas não
+                                            correspondem</small>
                                     </div>
                                 </div>
                                 <div class="card-footer text-muted">
-                                    <button type="button" class="btn btn-success btn-round col-lg-8">Cadastrar</button>
+                                    <button type="button" class="btn btn-success btn-round col-lg-8"
+                                        (click)="register()">Cadastrar</button>
+                                    <small class="d-flex justify-content-center text-danger mt-3" *ngIf="invalid">Verifique se todos os
+                                        campos estão preenchidos corretamente</small>
                                 </div>
                             </form>
                         </div>

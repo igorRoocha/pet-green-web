@@ -1,3 +1,4 @@
+import { AppBotstrapModule } from './../app-bootstrap.module';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { HttpModule } from '@angular/http';
 import { NgModule } from '@angular/core';
@@ -8,15 +9,20 @@ import { DirectiveModule } from '../directive/directive.module';
 import { UtilModule } from '../util/util.module';
 import { RouterModule } from '@angular/router';
 import { MODULE_COMPONENTS, MODULE_SERVICES_COMPONENTS,  } from './components.route';
+import { TagInputModule } from 'ngx-chips';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @NgModule({
     imports: [
+        NgxDropzoneModule,
+        TagInputModule,
         BrowserModule,
         BrowserAnimationsModule,
         FormsModule,
         DirectiveModule,
         ReactiveFormsModule,
         PerfectScrollbarModule,
+        AppBotstrapModule,
         UtilModule,
         HttpModule,
         RouterModule.forChild([]),
@@ -26,6 +32,9 @@ import { MODULE_COMPONENTS, MODULE_SERVICES_COMPONENTS,  } from './components.ro
         MODULE_COMPONENTS
     ],
     declarations: [
+        MODULE_COMPONENTS,
+    ],
+    entryComponents: [
         MODULE_COMPONENTS
     ],
     providers: [

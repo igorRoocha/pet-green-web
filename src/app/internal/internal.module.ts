@@ -1,3 +1,4 @@
+import { AppBotstrapModule } from '../app-bootstrap.module';
 import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import localePT from '@angular/common/locales/pt';
 import { registerLocaleData } from '@angular/common';
@@ -24,6 +25,7 @@ registerLocaleData(localePT);
         HttpModule,
         ComponentsModule,
         PerfectScrollbarModule,
+        AppBotstrapModule,
         DirectiveModule,
         RouterModule.forChild([]),
         ReactiveFormsModule.withConfig({ warnOnNgModelWithFormControl: 'never' })
@@ -32,7 +34,7 @@ registerLocaleData(localePT);
         MODULE_COMPONENTS_INTERNAL
     ],
     declarations: [
-        MODULE_COMPONENTS_INTERNAL,
+        MODULE_COMPONENTS_INTERNAL
     ],
     entryComponents: [
         MODULE_COMPONENTS_INTERNAL,
