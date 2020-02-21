@@ -22,7 +22,7 @@
               Você não possui raça cadastrada.
             </td>
           </tr>
-          <tr *ngFor="let breed of breeds">
+          <tr *ngFor="let breed of breedsPagination">
             <td>{{ breed.name }}</td>
             <td>{{ breed.specie.name }}</td>
             <td style="text-align: right;"><i class="fas fa-edit icon-edit cursor-click" (click)="edit(breed)"
@@ -32,6 +32,12 @@
           </tr>
         </tbody>
       </table>
+      <div class="d-flex justify-content-end mt-4" *ngIf="breeds.length > 0">
+      <pagination [boundaryLinks]="true" [itemsPerPage]="itemsPerPage" 
+        [totalItems]="breeds.length" [maxSize]="maxLinkPage" previousText="&lsaquo;" nextText="&rsaquo;"
+        firstText="&laquo;" lastText="&raquo;" (pageChanged)="paginate($event)">
+      </pagination>
+    </div>
     </div>
   </div>
 </div>

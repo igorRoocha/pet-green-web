@@ -14,6 +14,10 @@ import { HttpStatus } from 'src/app/models/enum/http-status.enum';
 export class BreedRegisterComponent implements OnInit {
   public modalRef: BsModalRef;
   public breeds: any = [];
+  public breedsPagination: any = [];
+  public page = 1;
+  public itemsPerPage = 7;
+  public maxLinkPage = 9;
 
   private title;
   private msg;
@@ -29,6 +33,7 @@ export class BreedRegisterComponent implements OnInit {
   private getBreeds() {
     this.breedService.get().subscribe((b: any) => {
       this.breeds = b;
+      this.breedsPagination = this.utilService.paginate(this.breeds, this.itemsPerPage, this.page);
     }, err => {
       if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND || err.status === HttpStatus.INTERNAL_SERVER_ERROR) {
         this.title = 'Ocorreu um erro durante a busca de raças :(';
@@ -65,6 +70,7 @@ export class BreedRegisterComponent implements OnInit {
             });
           }
           this.breeds.splice(index, 1);
+          this.breedsPagination = this.utilService.paginate(this.breeds, this.itemsPerPage, this.page);
         }
       }
     });
@@ -89,6 +95,8 @@ export class BreedRegisterComponent implements OnInit {
         this.getBreeds();
         this.utilService.showNotification('fas fa-thumbs-up', 'Edição realizada com sucesso!', 'success');
       }
+
+      this.breedsPagination = this.breeds;
     });
   }
 
@@ -104,6 +112,12 @@ export class BreedRegisterComponent implements OnInit {
     this.modalRef.content.closeBtnName = 'Cancelar';
 
     return new Observable<string>(this.utilService.getConfirmSubscriber(this.modalRef, this.modalService));
+  }
+
+  public paginate(event) {
+    this.page = event.page;
+    this.breedsPagination = this.breeds;
+    this.breedsPagination = this.utilService.paginate(this.breeds, this.itemsPerPage, event.page);
   }
 
 }

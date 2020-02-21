@@ -21,7 +21,7 @@
               Você não possui espécie cadastrada.
             </td>
           </tr>
-          <tr *ngFor="let specie of species">
+          <tr *ngFor="let specie of speciesPagination">
             <td>{{ specie.name }}</td>
             <td style="text-align: right;"><i class="fas fa-edit icon-edit cursor-click" (click)="edit(specie)"
                 tooltip="Editar Espécie"></i><i class="fas fa-times-circle ml-2 icon-delete cursor-click"
@@ -30,6 +30,12 @@
           </tr>
         </tbody>
       </table>
+      <div class="d-flex justify-content-end mt-4" *ngIf="species.length > 0">
+        <pagination [boundaryLinks]="true" [itemsPerPage]="itemsPerPage" 
+          [totalItems]="species.length" [maxSize]="maxLinkPage" previousText="&lsaquo;" nextText="&rsaquo;"
+          firstText="&laquo;" lastText="&raquo;" (pageChanged)="paginate($event)">
+        </pagination>
+      </div>
     </div>
   </div>
 </div>

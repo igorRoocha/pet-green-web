@@ -20,7 +20,6 @@ import { DirectiveModule } from './directive/directive.module';
 import { routing } from './app.route';
 import { InterceptedHttp } from './util/http.interceptor';
 import { TagInputModule } from 'ngx-chips';
-
 export const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -46,7 +45,7 @@ export const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface =
     InternalModule,
     ComponentsModule,
     HttpClientModule,
-    DirectiveModule
+    DirectiveModule,
   ],
   providers: [
     {

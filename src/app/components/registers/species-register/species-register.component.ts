@@ -15,6 +15,10 @@ export class SpeciesRegisterComponent implements OnInit {
 
   public modalRef: BsModalRef;
   public species: any = [];
+  public speciesPagination: any = [];
+  public page = 1;
+  public itemsPerPage = 7;
+  public maxLinkPage = 9;
 
   constructor(private modalService: BsModalService,
     @Inject(UtilService) private utilService: UtilService,
@@ -30,6 +34,7 @@ export class SpeciesRegisterComponent implements OnInit {
 
     this.specieService.get().subscribe((s: any) => {
       this.species = s;
+      this.speciesPagination = this.utilService.paginate(this.species, this.itemsPerPage, this.page);
     }, err => {
       if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND || err.status === HttpStatus.INTERNAL_SERVER_ERROR) {
         title = 'Ocorreu um erro durante a busca de espécies :(';
@@ -66,6 +71,7 @@ export class SpeciesRegisterComponent implements OnInit {
             });
           }
           this.species.splice(index, 1);
+          this.speciesPagination = this.utilService.paginate(this.species, this.itemsPerPage, this.page);
         }
       }
     });
@@ -90,6 +96,9 @@ export class SpeciesRegisterComponent implements OnInit {
         this.getSpecies();
         this.utilService.showNotification('fas fa-thumbs-up', 'Edição realizada com sucesso!', 'success');
       }
+
+      this.speciesPagination = this.species;
+
     });
   }
 
@@ -105,5 +114,11 @@ export class SpeciesRegisterComponent implements OnInit {
     this.modalRef.content.closeBtnName = 'Cancelar';
 
     return new Observable<string>(this.utilService.getConfirmSubscriber(this.modalRef, this.modalService));
+  }
+
+  public paginate(event) {
+    this.page = event.page;
+    this.speciesPagination = this.species;
+    this.speciesPagination = this.utilService.paginate(this.species, this.itemsPerPage, event.page);
   }
 }

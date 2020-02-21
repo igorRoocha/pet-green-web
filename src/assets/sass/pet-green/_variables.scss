@@ -1,6 +1,6 @@
-$font-color:                 #66615b !default;
+$font-color:                 rgb(46, 46, 46) !default;
 $fill-font-color:            rgba(255, 255, 255, 0.8);
-$font-family-sans-serif:     'Montserrat', "Helvetica", Arial, sans-serif;
+$font-family-sans-serif:     '"Varela Round", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif';
 
 $none:                       0   !default;
 $border-thin:                1px !default;
@@ -10,11 +10,13 @@ $white-color:                #FFFFFF !default;
 $white-bg:                   #FFFFFF !default;
 $white-states-color:         rgba($white-color, 0.8);
 
+$green-pet-green:            #28A745 !default;
+
 $smoke-bg:                   #F5F5F5 !default;
 $pale-bg:                    #FFFCF5 !default;
 $medium-pale-bg:             #F1EAE0 !default;
 
-$table-line-color:           #d3e5fd !default;
+$table-line-color:           #afdefd !default;
 $muted-color:                #a49e93 !default;
 
 $black-bg:                   rgba(30,30,30,.97) !default;
