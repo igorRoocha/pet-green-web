@@ -46,7 +46,8 @@ export class SidebarService {
           path: 'app/cadastro-raca'
         },
         {
-          title: 'Fornecedores'
+          title: 'Fornecedores',
+          path: 'app/fornecedores'
         },
         {
           title: 'Funcionários'

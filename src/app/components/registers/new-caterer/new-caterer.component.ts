@@ -1,44 +1,48 @@
-import { state } from '@angular/animations';
-import { HttpStatus } from './../../../models/enum/http-status.enum';
-import { ClinicService } from './../../../services/clinic.service';
+import { CatererService } from './../../../services/registers/caterer.service';
+import { Caterer } from './../../../models/caterer';
+import { City } from './../../../models/city';
 import { Address } from './../../../models/address';
-import { Clinic } from './../../../models/clinic';
-import { ContactRegisterComponent } from './../../../components/registers/contact-register/contact-register.component';
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { UtilService } from 'src/app/util/util.service';
-import { SchedulesRegisterComponent } from 'src/app/components/registers/schedules-register/schedules-register.component';
-import { DropzoneComponent } from 'src/app/components/dropzone/dropzone.component';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { ContactRegisterComponent } from '../contact-register/contact-register.component';
+import { SchedulesRegisterComponent } from '../schedules-register/schedules-register.component';
+import { DropzoneComponent } from '../../dropzone/dropzone.component';
 import { State } from 'src/app/models/state';
-import { City } from 'src/app/models/city';
+import { HttpStatus } from 'src/app/models/enum/http-status.enum';
 
 @Component({
-  selector: 'app-clinic',
-  templateUrl: './clinic.component.html',
-  styleUrls: ['./clinic.component.scss']
+  selector: 'app-new-caterer',
+  templateUrl: './new-caterer.component.html',
+  styleUrls: ['./new-caterer.component.scss']
 })
-export class ClinicComponent implements OnInit {
-  private clinic: Clinic;
+export class NewCatererComponent implements OnInit {
+  private caterer: Caterer;
   private address: Address = new Address();
   private city: City = new City();
   private state: State = new State();
-  private invalidClinic: boolean;
+  private invalidCaterer: boolean;
   private invalidAddress: boolean;
-  private statusFormClinic: boolean;
+  private statusFormCaterer: boolean;
   private statusFormAddress: boolean;
 
   @ViewChild(ContactRegisterComponent) contactRegisterComponent: ContactRegisterComponent;
-  @ViewChild(SchedulesRegisterComponent) schedulesRegisterComponent: SchedulesRegisterComponent;
   @ViewChild(DropzoneComponent) dropzoneComponent: DropzoneComponent;
 
-  constructor(@Inject(UtilService) private utilService: UtilService,
-    @Inject(ClinicService) private clinicService: ClinicService) { }
+  constructor(private router: Router,
+              @Inject(UtilService) private utilService: UtilService,
+              @Inject(CatererService) private catererService: CatererService) { }
 
   ngOnInit() {
   }
 
-  public getValuesClinicRegisterForm(res) {
-    this.clinic = res.value;
-    this.invalidClinic = res.invalid;
+  public goTo(route: string) {
+    this.utilService.goTo(this.router, route);
+  }
+
+  public getValuesCatererRegisterForm(res) {
+    this.caterer = res.value;
+    this.invalidCaterer = res.invalid;
   }
 
   public getValuesAddressRegisterForm(res) {
@@ -56,21 +60,20 @@ export class ClinicComponent implements OnInit {
   public save() {
     const alertMsg = 'Verifique se os formulários de cadastro estão preenchidos corretamente!';
 
-    if (this.invalidClinic || this.invalidAddress || this.address === undefined) {
+    if (this.invalidCaterer || this.invalidAddress) {
 
-      this.statusFormClinic = this.invalidClinic;
+      this.statusFormCaterer = this.invalidCaterer;
       this.statusFormAddress = this.invalidAddress;
 
       this.utilService.showNotification('fas fa-exclamation-triangle', alertMsg, 'warning');
       return;
-    } else if ((this.schedulesRegisterComponent.schedules === undefined || this.schedulesRegisterComponent.schedules.length === 0) ||
-      (this.contactRegisterComponent.contacts === undefined || this.contactRegisterComponent.contacts.length === 0)) {
+    } else if (this.contactRegisterComponent.contacts === undefined || this.contactRegisterComponent.contacts.length === 0) {
       this.utilService.showNotification('fas fa-exclamation-triangle', alertMsg, 'warning');
       return;
     }
 
     this.setAddress();
-    this.setClinic();
+    this.setCaterer();
     this.register();
 
   }
@@ -82,15 +85,14 @@ export class ClinicComponent implements OnInit {
     this.address.city.state = this.state;
   }
 
-  private setClinic() {
-    this.clinic.address = this.address;
-    this.clinic.contacts = this.contactRegisterComponent.contacts;
-    this.clinic.schedules = this.schedulesRegisterComponent.schedules;
-    this.clinic.userID = this.utilService.getUserId();
+  private setCaterer() {
+    this.caterer.address = this.address;
+    this.caterer.contacts = this.contactRegisterComponent.contacts;
+    this.caterer.userID = this.utilService.getUserId();
 
     if (this.dropzoneComponent.files !== undefined && this.dropzoneComponent.files.length > 0) {
       this.dropzoneComponent.readFile(this.dropzoneComponent.files[0]).then(content => {
-        this.clinic.logo = content.toString();
+        this.caterer.logo = content.toString();
       });
     }
   }
@@ -98,7 +100,7 @@ export class ClinicComponent implements OnInit {
   private register() {
     let msg;
     let title;
-    this.clinicService.register(this.clinic).subscribe((c: any) => {
+    this.catererService.register(this.caterer).subscribe((c: any) => {
       this.utilService.successMsg('Cadastrado com sucesso!', () => {});
     }, err => {
       if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND) {

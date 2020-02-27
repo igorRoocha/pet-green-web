@@ -1,15 +1,15 @@
 import { Address } from './address';
 import { Contact } from './contact';
 import { Schedules } from './schedules';
-export class Clinic {
+
+export class Caterer {
     id: string;
     name: string;
     taxId: string;
     socialReason: string;
+    stateRegistration: string;
     email: string;
     logo: string;
-    site: string;
-    facebook: string;
     createdAt: Date;
     updatedAt: Date;
     deletedAt: Date;
@@ -17,8 +17,4 @@ export class Clinic {
     contacts: Contact[];
     schedules: Schedules[];
     userID: string;
-
-    public Clinic() {
-        this.address = new Address();
-    }
 }

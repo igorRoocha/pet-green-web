@@ -4,7 +4,7 @@
       <div class="col-md-4">
         <div class="form-group">
           <label>CEP*</label>
-          <input type="text" placeholder="CEP" maxlength="9" formControlName="cep" (blur)="consultCep(fa.cep.value)"
+          <input type="text" tooltip="Para o preenchimento automático do formulário, informe o CEP" placeholder="CEP" maxlength="9" formControlName="cep" (blur)="consultCep(fa.cep.value)"
             class="form-control" cep required>
           <div *ngIf="fa.cep.errors && (fa.cep.dirty || fa.cep.touched || invalidForm)">
             <small class="d-flex justify-content-start text-danger" *ngIf="fa.cep.errors.required">Campo
@@ -12,7 +12,6 @@
             <small class="d-flex justify-content-start text-danger" *ngIf="fa.cep.errors.incorrect">CEP
               inválido</small>
           </div>
-          <label>*Para o preenchimento automático do formulário, informe o CEP</label>
         </div>
       </div>
       <div class="col-md-2">
@@ -68,10 +67,10 @@
           <label>Estado*</label>
           <input type="text" placeholder="Estado" formControlName="state" class="form-control" autocomplete="off"
             required>
-        </div>
-        <div *ngIf="fa.state.errors && (fa.state.dirty || fa.state.touched || invalidForm)">
-          <small class="d-flex justify-content-start text-danger" *ngIf="fa.state.errors.required">Campo
-            obrigatório</small>
+            <div *ngIf="fa.state.errors && (fa.state.dirty || fa.state.touched || invalidForm)">
+              <small class="d-flex justify-content-start text-danger" *ngIf="fa.state.errors.required">Campo
+                obrigatório</small>
+            </div>
         </div>
       </div>
     </div>

@@ -84,6 +84,10 @@ label {
   box-shadow: 0 0 8px 0 rgba(0,0,0,.08), 0 0 15px 0 rgba(0,0,0,.02), 0 0 20px 4px rgba(0,0,0,.06);        
 }
 
+.shadow {
+  box-shadow: 0 0 8px 0 rgba(0,0,0,.08), 0 0 15px 0 rgba(0,0,0,.02), 0 0 20px 4px rgba(0,0,0,.06);
+}
+
 thead .header-table {
   font-weight: 700;
 }
@@ -132,6 +136,27 @@ table td:last-child {
  border-radius: 1rem;
  width: 100%;
  margin-left: 1%;
+}
+
+.back {
+  border: none; 
+  text-align: center;
+}
+
+::ng-deep .tooltip-inner {
+  background-color: $black-hr;
+  color: #fff;
+  max-width: 400px;
+}
+::ng-deep .tooltip.top .tooltip-arrow:before,
+::ng-deep .tooltip.top .tooltip-arrow {
+  border-top-color: $black-hr;
+  width: auto;
+}
+
+.card-body {
+  display: flex; 
+  flex-direction: column;
 }
 
 .cursor-default {
