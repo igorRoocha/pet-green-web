@@ -1,3 +1,4 @@
+import { CnpjFilter } from './cnpj.filtes';
 import { CpfDirective } from './cpf.directive';
 import { TelefoneFilter } from './telefone-filter';
 import { CpfFilter } from './cpf-filter';
@@ -18,6 +19,7 @@ import { RgFilter } from './rg-filter';
     AmountDirective,
     CepDirective,
     CnpjDirective,
+    CnpjFilter,
     CpfCnpjDirective,
     CpfDirective,
     CpfFilter,
@@ -33,6 +35,7 @@ import { RgFilter } from './rg-filter';
     AmountDirective,
     CepDirective,
     CnpjDirective,
+    CnpjFilter,
     CpfCnpjDirective,
     CpfDirective,
     CpfFilter,

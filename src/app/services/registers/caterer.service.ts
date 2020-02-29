@@ -18,7 +18,18 @@ export class CatererService {
     }
 
     public register(caterer: Caterer) {
-        console.log(caterer);
         return this.http.post(`${this.baseUrl}register`, caterer, this.header).pipe(map(res => res));
+    }
+
+    public getByClinicID(clinicID) {
+        return this.http.get(`${this.baseUrl}getByClinicID?clinicID=${clinicID}`, this.header).pipe(map(res => res));
+    }
+
+    public edit(breed: Caterer) {
+        return this.http.put(`${this.baseUrl}`, breed, this.header).pipe(map(res => res));
+    }
+
+    public delete(id: string) {
+        return this.http.delete(`${this.baseUrl}${id}`, this.header).pipe(map(res => res));
     }
 }

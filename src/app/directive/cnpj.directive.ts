@@ -18,16 +18,16 @@ export class CnpjDirective {
       .replace(/(\d{4})(\d)/,"$1-$2");
   }
 
-  @HostListener('paste', ['$event']) blockPaste(e: KeyboardEvent) {
-    e.preventDefault();
-  }
+  // @HostListener('paste', ['$event']) blockPaste(e: KeyboardEvent) {
+  //   e.preventDefault();
+  // }
 
-  @HostListener('copy', ['$event']) blockCopy(e: KeyboardEvent) {
-    e.preventDefault();
-  }
+  // @HostListener('copy', ['$event']) blockCopy(e: KeyboardEvent) {
+  //   e.preventDefault();
+  // }
 
-  @HostListener('cut', ['$event']) blockCut(e: KeyboardEvent) {
-    e.preventDefault();
-  }
+  // @HostListener('cut', ['$event']) blockCut(e: KeyboardEvent) {
+  //   e.preventDefault();
+  // }
 
 }

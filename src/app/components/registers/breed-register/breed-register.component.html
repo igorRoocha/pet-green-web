@@ -25,7 +25,7 @@
           <tr *ngFor="let breed of breedsPagination">
             <td>{{ breed.name }}</td>
             <td>{{ breed.specie.name }}</td>
-            <td style="text-align: right;"><i class="fas fa-edit icon-edit cursor-click" (click)="edit(breed)"
+            <td style="text-align: right;"><i class="fas fa-pencil-alt cursor-click" (click)="edit(breed)"
                 tooltip="Editar Raça"></i><i class="fas fa-times-circle ml-2 icon-delete cursor-click"
                 (click)="delete(breed)" tooltip="Excluir Raça"></i>
             </td>

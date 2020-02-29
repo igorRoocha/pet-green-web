@@ -13,7 +13,7 @@ export class Caterer {
     createdAt: Date;
     updatedAt: Date;
     deletedAt: Date;
-    address: Address;
+    address: Address[];
     contacts: Contact[];
     schedules: Schedules[];
     userID: string;

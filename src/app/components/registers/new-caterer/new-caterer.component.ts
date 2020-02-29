@@ -86,7 +86,8 @@ export class NewCatererComponent implements OnInit {
   }
 
   private setCaterer() {
-    this.caterer.address = this.address;
+    this.caterer.address = [];
+    this.caterer.address.push(this.address);
     this.caterer.contacts = this.contactRegisterComponent.contacts;
     this.caterer.userID = this.utilService.getUserId();
 
@@ -95,6 +96,7 @@ export class NewCatererComponent implements OnInit {
         this.caterer.logo = content.toString();
       });
     }
+
   }
 
   private register() {
