@@ -1,3 +1,4 @@
+import { Address } from './../../../models/address';
 import { UtilService } from '../../../util/util.service';
 import { AddressService } from '../../../services/address.service';
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
@@ -13,6 +14,7 @@ export class AddressRegisterComponent implements OnInit {
   private formAddress: FormGroup;
 
   @Input('invalidForm') invalidForm: boolean;
+  @Input('address') address: Address = new Address();
   @Output('resComponent') resComponent = new EventEmitter();
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
@@ -21,6 +23,7 @@ export class AddressRegisterComponent implements OnInit {
 
   ngOnInit() {
     this.formControls();
+    this.setForm();
   }
 
   get fa() { return this.formAddress.controls; }
@@ -28,6 +31,15 @@ export class AddressRegisterComponent implements OnInit {
   formControls() {
     if (!this.formAddress) {
       this.formAddress = this.formBuilder.group({
+        id: ['', [
+
+        ]],
+        IDCity: ['', [
+
+        ]],
+        IDState: ['', [
+
+        ]],
         cep: ['', [
           Validators.required,
         ]],
@@ -49,13 +61,25 @@ export class AddressRegisterComponent implements OnInit {
         complement: ['', [
 
         ]],
-        ibge: ['',[]],
-        uf: ['',[]]
+        ibge: ['', []],
+        uf: ['', []]
       });
 
       this.formAddress.valueChanges.subscribe(() => {
         this.resComponent.emit(this.formAddress);
       });
+    }
+  }
+
+  private setForm() {
+    if (this.address.city) {
+      this.formAddress.controls.city.setValue(this.address.city.name);
+      this.formAddress.controls.IDCity.setValue(this.address.city.id);
+
+      if (this.address.city.state) {
+        this.formAddress.controls.state.setValue(this.address.city.state.name);
+        this.formAddress.controls.IDState.setValue(this.address.city.state.id);
+      }
     }
   }
 

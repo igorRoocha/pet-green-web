@@ -25,8 +25,8 @@ export class CatererService {
         return this.http.get(`${this.baseUrl}getByClinicID?clinicID=${clinicID}`, this.header).pipe(map(res => res));
     }
 
-    public edit(breed: Caterer) {
-        return this.http.put(`${this.baseUrl}`, breed, this.header).pipe(map(res => res));
+    public edit(caterer: Caterer) {
+        return this.http.put(`${this.baseUrl}`, caterer, this.header).pipe(map(res => res));
     }
 
     public delete(id: string) {

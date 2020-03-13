@@ -1,14 +1,14 @@
 import { City } from './city';
 export class Address {
-    id: string;
-    cep: string;
-    number: number;
-    street: string;
-    neighborhood: string;
-    complement: string;
-    city: City;
+    public id: string;
+    public cep: string;
+    public number: string;
+    public street: string;
+    public neighborhood: string;
+    public complement: string;
+    public city: City;
 
-    public Address() {
-        this.city = new City();
+    public constructor(init?: Partial<Address>) {
+        Object.assign(this, init);
     }
 }

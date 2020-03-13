@@ -19,7 +19,9 @@
         </td>
       </tr>
       <tr *ngFor="let contact of contacts">
-        <td>{{ contact.number }}</td>
+        <td>
+          {{ contact.number | telefone }}
+        </td>
         <td colspan="5">{{ contact.contactType }}</td>
         <td style="text-align: right;"><i class="fas fa-pencil-alt cursor-click" (click)="edit(contact)" tooltip="Editar Contato"></i><i
             class="fas fa-times-circle ml-2 icon-delete cursor-click" (click)="delete(contact)" tooltip="Excluir Contato"></i>

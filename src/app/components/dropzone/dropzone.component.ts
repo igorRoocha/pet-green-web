@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input } from '@angular/core';
 import { UtilService } from 'src/app/util/util.service';
 
 @Component({
@@ -8,11 +8,15 @@ import { UtilService } from 'src/app/util/util.service';
 })
 export class DropzoneComponent implements OnInit {
   public files: File[] = [];
+  @Input('files') inputFiles: string;
   public description = 'Arraste o arquivo aqui ou clique para fazer upload';
 
   constructor(@Inject(UtilService) private utilService: UtilService) { }
 
   ngOnInit() {
+    if (this.inputFiles && this.inputFiles.length > 0) {
+      this.writeFile(this.inputFiles, 'image.jpg').then(file => this.files.push(file));
+    }
   }
 
   onSelect(event) {
@@ -51,5 +55,18 @@ export class DropzoneComponent implements OnInit {
 
       reader.readAsDataURL(file);
     });
+  }
+
+  public async writeFile(dataURI: any, fileName: string): Promise<File> {
+    const arr = dataURI.split(',');
+    const mime = arr[0].match(/:(.*?);/)[1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+        u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], fileName, {type: mime});
   }
 }

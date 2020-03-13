@@ -10,20 +10,20 @@
             <span class="tab-title cursor-click font-header-tab"><i class="fas fa-building"></i> Dados
               Gerais</span>
           </ng-template>
-          <caterer-form [invalidForm]="statusFormCaterer" (resComponent)="getValuesCatererRegisterForm($event)"></caterer-form>
+          <caterer-form [invalidForm]="statusFormCaterer" [caterer]="caterer" (resComponent)="getValuesCatererRegisterForm($event)"></caterer-form>
         </tab>
         <tab class="tab-content">
           <ng-template tabHeading>
             <span class="header-tab cursor-click font-header-tab"><i class="fas fa-map-marker-alt"></i> Endereço</span>
           </ng-template>
-          <address-register [invalidForm]="statusFormAddress" (resComponent)="getValuesAddressRegisterForm($event)">
+          <address-register [invalidForm]="statusFormAddress" [address]="address" (resComponent)="getValuesAddressRegisterForm($event)">
           </address-register>
         </tab>
         <tab class="tab-content">
           <ng-template tabHeading>
             <span class="header-tab cursor-click font-header-tab"><i class="fas fa-phone-square"></i> Contatos</span>
           </ng-template>
-          <contact-register></contact-register>
+          <contact-register [contacts]="contacts"></contact-register>
         </tab>
         <tab class="tab-content">
           <ng-template tabHeading>
@@ -31,7 +31,7 @@
           </ng-template>
           <div class="row">
             <div class="col-md-6">
-              <dropzone></dropzone>
+              <dropzone [files]="files"></dropzone>
             </div>
           </div>
         </tab>

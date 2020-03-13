@@ -1,5 +1,6 @@
+import { Caterer } from './../../../models/caterer';
 import { CatererService } from './../../../services/registers/caterer.service';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras } from '@angular/router';
 import { UtilService } from './../../../util/util.service';
 import { Component, OnInit, Inject } from '@angular/core';
 import { HttpStatus } from 'src/app/models/enum/http-status.enum';
@@ -10,8 +11,8 @@ import { HttpStatus } from 'src/app/models/enum/http-status.enum';
   styleUrls: ['./caterer-register.component.scss']
 })
 export class CatererRegisterComponent implements OnInit {
-  public caterers: any = [];
-  public caterersPagination: any = [];
+  public caterers: Caterer[] = [];
+  public caterersPagination: Caterer[] = [];
   public page = 1;
   public itemsPerPage = 7;
   public maxLinkPage = 9;
@@ -42,7 +43,9 @@ export class CatererRegisterComponent implements OnInit {
   }
 
   public edit(caterer) {
-
+    const url = 'app/cadastro-fornecedor';
+    const navigationExtras: NavigationExtras = {state: {caterer: caterer}};
+    this.router.navigate([url], navigationExtras);
   }
 
   public delete(caterer) {
@@ -71,6 +74,12 @@ export class CatererRegisterComponent implements OnInit {
         }
       }
     });
+  }
+
+  public paginate(event) {
+    this.page = event.page;
+    this.caterersPagination = this.caterers;
+    this.caterersPagination = this.utilService.paginate(this.caterers, this.itemsPerPage, event.page);
   }
 
   public goTo(route: string) {

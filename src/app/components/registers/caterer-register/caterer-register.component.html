@@ -25,7 +25,7 @@
           <tr *ngFor="let caterer of caterersPagination">
             <td>{{ caterer.name }}</td>
             <td>{{ caterer._TaxId | cnpj }}</td>
-            <td>{{ caterer.addresses[0].city.name }} - {{ caterer.addresses[0].city.state.uf }}</td>
+            <td>{{ caterer.address[0].city.name }} - {{ caterer.address[0].city.state.uf }}</td>
             <td style="text-align: right;"><i class="fas fa-pencil-alt cursor-click" (click)="edit(caterer)"
                 tooltip="Editar Fornecedor"></i><i class="fas fa-times-circle ml-2 icon-delete cursor-click"
                 (click)="delete(caterer)" tooltip="Excluir Fornecedor"></i>

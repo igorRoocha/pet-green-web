@@ -18,7 +18,7 @@ import { City } from 'src/app/models/city';
 })
 export class ClinicComponent implements OnInit {
   private clinic: Clinic;
-  private address: Address = new Address();
+  public address: Address = new Address() as Address;
   private city: City = new City();
   private state: State = new State();
   private invalidClinic: boolean;
@@ -42,8 +42,7 @@ export class ClinicComponent implements OnInit {
   }
 
   public getValuesAddressRegisterForm(res) {
-    this.address = res.value;
-
+    this.address = new Address(res.value);
     this.city.name = res.value.city;
     this.city.ibge = res.value.ibge;
 

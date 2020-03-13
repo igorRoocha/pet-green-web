@@ -1,3 +1,4 @@
+import { Caterer } from './../../../../models/caterer';
 import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { UtilService } from 'src/app/util/util.service';
@@ -10,7 +11,8 @@ import { UtilService } from 'src/app/util/util.service';
 export class CatererFormComponent implements OnInit {
   private formGeneralData: FormGroup;
   @Input('invalidForm') invalidForm: boolean;
-  @Output('resComponent') resComponent = new EventEmitter();
+  @Input('caterer') caterer: Caterer = new Caterer();
+  @Output('resComponent') resComponent: EventEmitter<any> = new EventEmitter();
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
   @Inject(UtilService) private utilService: UtilService) { }
@@ -23,6 +25,9 @@ export class CatererFormComponent implements OnInit {
 
   private formControls() {
     this.formGeneralData = this.formBuilder.group({
+      id: ['', [
+
+      ]],
       name: ['', [
         Validators.required
       ]],

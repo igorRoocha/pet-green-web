@@ -10,6 +10,7 @@ import { SchedulesRegisterComponent } from '../schedules-register/schedules-regi
 import { DropzoneComponent } from '../../dropzone/dropzone.component';
 import { State } from 'src/app/models/state';
 import { HttpStatus } from 'src/app/models/enum/http-status.enum';
+import { Contact } from 'src/app/models/contact';
 
 @Component({
   selector: 'app-new-caterer',
@@ -17,8 +18,13 @@ import { HttpStatus } from 'src/app/models/enum/http-status.enum';
   styleUrls: ['./new-caterer.component.scss']
 })
 export class NewCatererComponent implements OnInit {
-  private caterer: Caterer;
-  private address: Address = new Address();
+  public caterer: Caterer;
+  public address: Address = new Address();
+  public contacts: Contact[];
+  public files: File[] = [];
+
+  private catererFromState: Caterer;
+  private isEdit: boolean;
   private city: City = new City();
   private state: State = new State();
   private invalidCaterer: boolean;
@@ -30,10 +36,27 @@ export class NewCatererComponent implements OnInit {
   @ViewChild(DropzoneComponent) dropzoneComponent: DropzoneComponent;
 
   constructor(private router: Router,
-              @Inject(UtilService) private utilService: UtilService,
-              @Inject(CatererService) private catererService: CatererService) { }
+    @Inject(UtilService) private utilService: UtilService,
+    @Inject(CatererService) private catererService: CatererService) {
+    this.caterer = new Caterer();
+    this.getDataFromRouter();
+  }
 
   ngOnInit() {
+  }
+
+  private getDataFromRouter() {
+    const navigation = this.router.getCurrentNavigation();
+    const state = navigation.extras.state as { caterer: any };
+
+    if (state && state.caterer !== undefined) {
+      this.isEdit = true;
+      this.catererFromState = state.caterer;
+      this.caterer = state.caterer;
+      this.address = state.caterer.address[0];
+      this.contacts = state.caterer.contacts;
+      this.files = state.caterer.logo;
+    }
   }
 
   public goTo(route: string) {
@@ -47,18 +70,19 @@ export class NewCatererComponent implements OnInit {
 
   public getValuesAddressRegisterForm(res) {
     this.address = res.value;
-
     this.city.name = res.value.city;
     this.city.ibge = res.value.ibge;
+    this.city.id = res.value.IDCity;
 
     this.state.name = res.value.state;
     this.state.uf = res.value.uf;
+    this.state.id = res.value.IDState;
 
     this.invalidAddress = res.invalid;
   }
 
   public save() {
-    const alertMsg = 'Verifique se os formulários de cadastro estão preenchidos corretamente!';
+    const alertMsg = 'Verifique se todos os campos estão preenchidos corretamente!';
 
     if (this.invalidCaterer || this.invalidAddress) {
 
@@ -74,8 +98,6 @@ export class NewCatererComponent implements OnInit {
 
     this.setAddress();
     this.setCaterer();
-    this.register();
-
   }
 
   private setAddress() {
@@ -94,26 +116,69 @@ export class NewCatererComponent implements OnInit {
     if (this.dropzoneComponent.files !== undefined && this.dropzoneComponent.files.length > 0) {
       this.dropzoneComponent.readFile(this.dropzoneComponent.files[0]).then(content => {
         this.caterer.logo = content.toString();
-      });
-    }
 
+        if (!this.isEdit) {
+          this.register();
+        } else {
+          this.edit();
+        }
+      });
+    } else {
+      if (!this.isEdit) {
+        this.register();
+      } else {
+        this.edit();
+      }
+
+    }
   }
 
   private register() {
     let msg;
     let title;
+
     this.catererService.register(this.caterer).subscribe((c: any) => {
-      this.utilService.successMsg('Cadastrado com sucesso!', () => {});
+      this.utilService.successMsg('Cadastrado com sucesso!', () => {
+        this.goTo('app/fornecedores');
+      });
     }, err => {
       if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND) {
-        title = 'Ocorreu um erro durante o cadastro de empresa :(';
+        title = 'Ocorreu um erro durante o cadastro de fornecedor :(';
         msg = 'Por favor, entre em contato com nossa equipe para resolvermos o problema o mais breve possível.';
         this.utilService.errorMsg(msg, title, () => { });
       }
 
       if (err.status === HttpStatus.CONFLICT) {
-        this.utilService.alertMsg('Foi encontrado um cadastro no sistema com o mesmo CPF/CNPJ.', () => {});
+        this.utilService.alertMsg('Foi encontrado um cadastro no sistema com o mesmo CPF/CNPJ.', () => { });
       }
     });
+  }
+
+  private edit() {
+    let msg;
+    let title;
+    console.log(this.caterer);
+    this.catererService.edit(this.caterer).subscribe((c: any) => {
+      this.utilService.successMsg('Alterado com sucesso!', () => {
+        this.goTo('app/fornecedores');
+      });
+    }, err => {
+      if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND ||
+          err.status === HttpStatus.INTERNAL_SERVER_ERROR) {
+        title = 'Ocorreu um erro durante a atualização de fornecedor :(';
+        msg = 'Por favor, entre em contato com nossa equipe para resolvermos o problema o mais breve possível.';
+        this.utilService.errorMsg(msg, title, () => { });
+      }
+
+      if (err.status === HttpStatus.CONFLICT) {
+        this.utilService.alertMsg('Foi encontrado um cadastro no sistema com o mesmo CPF/CNPJ.', () => { });
+      }
+    });
+  }
+
+  private setCatererForEdit() {
+    this.caterer.id = this.catererFromState.id;
+    this.caterer.address[0].id = this.catererFromState.address[0].id;
+    this.caterer.contacts
   }
 }

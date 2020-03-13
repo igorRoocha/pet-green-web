@@ -1,3 +1,4 @@
+import { CepFilter } from './cep.filter';
 import { CnpjFilter } from './cnpj.filtes';
 import { CpfDirective } from './cpf.directive';
 import { TelefoneFilter } from './telefone-filter';
@@ -18,6 +19,7 @@ import { RgFilter } from './rg-filter';
   declarations: [
     AmountDirective,
     CepDirective,
+    CepFilter,
     CnpjDirective,
     CnpjFilter,
     CpfCnpjDirective,
@@ -34,6 +36,7 @@ import { RgFilter } from './rg-filter';
   exports: [
     AmountDirective,
     CepDirective,
+    CepFilter,
     CnpjDirective,
     CnpjFilter,
     CpfCnpjDirective,
