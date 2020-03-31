@@ -40,6 +40,9 @@ export class NewScheduleComponent implements OnInit {
 
   private formControls() {
     this.fmSchedules = this.formBuilder.group({
+      id: ['', [
+
+      ]],
       days: ['', []],
       startHour: ['', [
         Validators.required,
@@ -60,6 +63,7 @@ export class NewScheduleComponent implements OnInit {
         this.itemsAdded.push(this.schedule.days);
       }
 
+      this.fmSchedules.controls.id.setValue(this.schedule.id ? this.schedule.id : null);
       this.fmSchedules.controls.startHour.setValue(this.schedule.startHour);
       this.fmSchedules.controls.endHour.setValue(this.schedule.endHour);
     }

@@ -1,3 +1,6 @@
+import { CoatRegisterComponent } from './registers/coat-register/coat-register.component';
+import { CatererFormComponent } from './registers/forms/caterer-form/caterer-form.component';
+import { NewCatererComponent } from './registers/new-caterer/new-caterer.component';
 import { BreedService } from './../services/registers/breed.service';
 import { SpecieService } from './../services/registers/species.service';
 import { SpeciesRegisterComponent } from './registers/species-register/species-register.component';
@@ -15,10 +18,15 @@ import { NewScheduleComponent } from './registers/modal/new-schedule/new-schedul
 import { ClinicRegisterComponent } from './registers/clinic-register/clinic-register.component';
 import { BreedRegisterComponent } from './registers/breed-register/breed-register.component';
 import { NewBreedComponent } from './registers/modal/new-breed/new-breed.component';
+import { CatererRegisterComponent } from './registers/caterer-register/caterer-register.component';
+import { NewCoatComponent } from './registers/modal/new-coat/new-coat.component';
 
 export const MODULE_COMPONENTS = [
     BreedRegisterComponent,
+    CatererFormComponent,
+    CatererRegisterComponent,
     ClinicRegisterComponent,
+    CoatRegisterComponent,
     SidebarComponent,
     DashboardComponent,
     NavbarComponent,
@@ -30,7 +38,9 @@ export const MODULE_COMPONENTS = [
     NewSpeciesComponent,
     DropzoneComponent,
     SpeciesRegisterComponent,
-    NewBreedComponent
+    NewBreedComponent,
+    NewCatererComponent,
+    NewCoatComponent,
 ];
 
 export const MODULE_SERVICES_COMPONENTS = [

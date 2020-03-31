@@ -1,23 +1,28 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, Input, OnChanges } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Observable } from 'rxjs';
 import { NewScheduleComponent } from '../modal/new-schedule/new-schedule.component';
 import { UtilService } from 'src/app/util/util.service';
+import { Schedules } from 'src/app/models/schedules';
 
 @Component({
   selector: 'schedules-register',
   templateUrl: './schedules-register.component.html',
   styleUrls: ['./schedules-register.component.scss']
 })
-export class SchedulesRegisterComponent implements OnInit {
+export class SchedulesRegisterComponent implements OnChanges {
   public schedules: any = [];
+  @Input('schedules') inputSchedules: Schedules[] = [];
   public modalRef: BsModalRef;
   private daysOfWeek = ['Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado', 'Domingo'];
 
   constructor(private modalService: BsModalService,
     @Inject(UtilService) private utilService: UtilService) { }
 
-  ngOnInit() {
+  ngOnChanges() {
+    if (this.inputSchedules) {
+      this.schedules = this.inputSchedules;
+    }
   }
 
   public edit(schedule) {

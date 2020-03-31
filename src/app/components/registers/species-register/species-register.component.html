@@ -23,7 +23,7 @@
           </tr>
           <tr *ngFor="let specie of speciesPagination">
             <td>{{ specie.name }}</td>
-            <td style="text-align: right;"><i class="fas fa-edit icon-edit cursor-click" (click)="edit(specie)"
+            <td style="text-align: right;"><i class="fas fa-pencil-alt cursor-click" (click)="edit(specie)"
                 tooltip="Editar Espécie"></i><i class="fas fa-times-circle ml-2 icon-delete cursor-click"
                 (click)="delete(specie)" tooltip="Excluir Espécie"></i>
             </td>

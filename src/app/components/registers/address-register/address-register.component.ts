@@ -1,6 +1,7 @@
+import { Address } from './../../../models/address';
 import { UtilService } from '../../../util/util.service';
 import { AddressService } from '../../../services/address.service';
-import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpStatus } from 'src/app/models/enum/http-status.enum';
 
@@ -9,18 +10,21 @@ import { HttpStatus } from 'src/app/models/enum/http-status.enum';
   templateUrl: './address-register.component.html',
   styleUrls: ['./address-register.component.scss']
 })
-export class AddressRegisterComponent implements OnInit {
+export class AddressRegisterComponent implements OnChanges {
   private formAddress: FormGroup;
 
   @Input('invalidForm') invalidForm: boolean;
+  @Input('address') address: Address = new Address();
   @Output('resComponent') resComponent = new EventEmitter();
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     @Inject(AddressService) private addressService: AddressService,
-    @Inject(UtilService) private utilService: UtilService) { }
+    @Inject(UtilService) private utilService: UtilService) {
+  }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.formControls();
+    this.setForm();
   }
 
   get fa() { return this.formAddress.controls; }
@@ -28,6 +32,15 @@ export class AddressRegisterComponent implements OnInit {
   formControls() {
     if (!this.formAddress) {
       this.formAddress = this.formBuilder.group({
+        id: ['', [
+
+        ]],
+        IDCity: ['', [
+
+        ]],
+        IDState: ['', [
+
+        ]],
         cep: ['', [
           Validators.required,
         ]],
@@ -49,13 +62,23 @@ export class AddressRegisterComponent implements OnInit {
         complement: ['', [
 
         ]],
-        ibge: ['',[]],
-        uf: ['',[]]
+        ibge: ['', []],
+        uf: ['', []]
       });
 
       this.formAddress.valueChanges.subscribe(() => {
         this.resComponent.emit(this.formAddress);
       });
+    }
+  }
+
+  private setForm() {
+    if (this.address.city && this.address.city.state) {
+        this.formAddress.controls.city.setValue(this.address.city.name);
+        this.formAddress.controls.IDCity.setValue(this.address.city.id);
+
+        this.formAddress.controls.state.setValue(this.address.city.state.name);
+        this.formAddress.controls.IDState.setValue(this.address.city.state.id);
     }
   }
 

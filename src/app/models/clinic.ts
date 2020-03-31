@@ -5,6 +5,7 @@ export class Clinic {
     id: string;
     name: string;
     taxId: string;
+    socialReason: string;
     email: string;
     logo: string;
     site: string;
@@ -15,6 +16,7 @@ export class Clinic {
     address: Address;
     contacts: Contact[];
     schedules: Schedules[];
+    userID: string;
 
     public Clinic() {
         this.address = new Address();

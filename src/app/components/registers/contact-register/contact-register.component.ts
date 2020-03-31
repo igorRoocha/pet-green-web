@@ -1,5 +1,6 @@
+import { Contact } from './../../../models/contact';
 import { UtilService } from 'src/app/util/util.service';
-import { Component, OnInit, TemplateRef, ViewChild, Inject } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild, Inject, Input, OnChanges } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { NewContactComponent } from '../modal/new-contact/new-contact.component';
 import { Observable } from 'rxjs';
@@ -9,16 +10,21 @@ import { Observable } from 'rxjs';
   templateUrl: './contact-register.component.html',
   styleUrls: ['./contact-register.component.scss']
 })
-export class ContactRegisterComponent implements OnInit {
+export class ContactRegisterComponent implements OnChanges {
 
   public modalRef: BsModalRef;
-  public contacts: any = [];
+  public contacts: any[] = [];
+  @Input('contacts') inputContacts: any;
+
   @ViewChild(NewContactComponent) newContactComponent: NewContactComponent;
 
   constructor(private modalService: BsModalService,
-              @Inject(UtilService) private utilService: UtilService) { }
+    @Inject(UtilService) private utilService: UtilService) { }
 
-  ngOnInit() {
+  ngOnChanges() {
+    if (this.inputContacts) {
+      this.contacts = this.inputContacts;
+    }
   }
 
   public edit(contact) {

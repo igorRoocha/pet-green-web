@@ -60,7 +60,14 @@ export class SpeciesRegisterComponent implements OnInit {
           if (specie.id) {
             this.specieService.delete(specie.id).subscribe(() => {
               this.utilService.showNotification('far fa-check-circle', 'Removido com sucesso!', 'success');
+              this.species.splice(index, 1);
+              this.speciesPagination = this.utilService.paginate(this.species, this.itemsPerPage, this.page);
             }, err => {
+              if (err.status === HttpStatus.CONFLICT) {
+                msg = 'Não é possível remover a espécie selecionada, pois existem registros vinculados a ela.';
+                this.utilService.alertMsg(msg, () => {});
+              }
+
               if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND
                 || err.status === HttpStatus.INTERNAL_SERVER_ERROR) {
                 title = 'Ocorreu um erro durante a exclusão da espécie :(';
@@ -68,10 +75,9 @@ export class SpeciesRegisterComponent implements OnInit {
                 this.utilService.errorMsg(msg, title, () => { });
                 console.log(err);
               }
+              this.speciesPagination = this.utilService.paginate(this.species, this.itemsPerPage, this.page);
             });
           }
-          this.species.splice(index, 1);
-          this.speciesPagination = this.utilService.paginate(this.species, this.itemsPerPage, this.page);
         }
       }
     });

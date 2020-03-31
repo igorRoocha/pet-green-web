@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './util/auth.guard';
 import { ExternalComponent } from './external/external.component';
 import { MODULE_ROUTES_EXTERNAL } from './external/external.route';
+import { ComponentsComponent } from './components/components.component';
 
 const APP_ROUTES: Routes = [
     {

@@ -98,6 +98,14 @@ export class UtilService {
     return null;
   }
 
+  public getUser(): any {
+    if (this.isLogged()) {
+      const obj = JSON.parse(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY));
+      return obj;
+    }
+    return null;
+  }
+
   public getLogin(): string {
     if (this.isLogged()) {
       const obj = JSON.parse(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY));
@@ -122,7 +130,7 @@ export class UtilService {
     return null;
   }
 
-  public getId(): string {
+  public getUserId(): string {
     if (this.isLogged()) {
       const obj = JSON.parse(localStorage.getItem(LOCALSTORAGE_TOKEN_KEY));
       return obj.id;
