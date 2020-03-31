@@ -56,7 +56,8 @@ export class SidebarService {
           title: 'Laboratórios'
         },
         {
-          title: 'Pelagens'
+          title: 'Pelagens',
+          path: 'app/cadastro-pelagem'
         },
         {
           title: 'Perfis de Acesso'

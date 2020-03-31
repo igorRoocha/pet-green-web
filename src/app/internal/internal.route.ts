@@ -1,3 +1,5 @@
+import { coatRegisterRoute } from './registers/coat/coat.route';
+import { CoatComponent } from './registers/coat/coat.component';
 import { CatererService } from './../services/registers/caterer.service';
 import { catererRoute } from './registers/caterer/caterer.route';
 import { breedRegisterRoute } from './registers/breed/breed.route';
@@ -18,6 +20,7 @@ export const MODULE_ROUTES_INTERNAL: Route[] = [
     breedRegisterRoute,
     catererRoute,
     clinicRegisterRoute,
+    coatRegisterRoute,
     newCatererRoute,
     speciesRegisterRoute,
     home_route,
@@ -27,6 +30,7 @@ export const MODULE_ROUTES_INTERNAL: Route[] = [
 export const MODULE_COMPONENTS_INTERNAL = [
     CatererComponent,
     ClinicComponent,
+    CoatComponent,
     HomeComponent,
     SpeciesComponent,
     BreedComponent

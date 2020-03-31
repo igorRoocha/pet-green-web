@@ -1,3 +1,4 @@
+import { Clinic } from './../../../models/clinic';
 import { UtilService } from './../../../util/util.service';
 import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -10,6 +11,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 export class ClinicRegisterComponent implements OnInit {
   private formGeneralData: FormGroup;
   @Input('invalidForm') invalidForm: boolean;
+  @Input('clinic') clinic: Clinic = new Clinic();
   @Output('resComponent') resComponent = new EventEmitter();
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
@@ -23,6 +25,8 @@ export class ClinicRegisterComponent implements OnInit {
 
   private formControls() {
     this.formGeneralData = this.formBuilder.group({
+      id: ['', []
+      ],
       name: ['', [
         Validators.required
       ]],

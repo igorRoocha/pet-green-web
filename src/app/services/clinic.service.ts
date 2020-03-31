@@ -21,7 +21,11 @@ export class ClinicService {
         return this.http.post(`${this.baseUrl}register`, clinic, this.header).pipe(map(res => res));
     }
 
-    public getClinic() {
-        return this.http.get(`${this.baseUrl}getClinic`, this.header).pipe(map(res => res));
+    public edit(clinic: Clinic) {
+        return this.http.put(`${this.baseUrl}`, clinic, this.header).pipe(map(res => res));
+    }
+
+    public getClinicByUserID(id) {
+        return this.http.get(`${this.baseUrl}${id}`, this.header).pipe(map(res => res));
     }
 }

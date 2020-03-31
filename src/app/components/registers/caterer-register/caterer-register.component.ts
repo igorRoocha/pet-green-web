@@ -29,7 +29,7 @@ export class CatererRegisterComponent implements OnInit {
   }
 
   private getCaterers() {
-    this.catererService.getByClinicID(this.utilService.getUser().clinicID).subscribe((b: any) => {
+    this.catererService.getByUserID(this.utilService.getUser().id).subscribe((b: any) => {
       this.caterers = b;
       this.caterersPagination = this.utilService.paginate(this.caterers, this.itemsPerPage, this.page);
     }, err => {

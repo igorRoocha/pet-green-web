@@ -1,7 +1,7 @@
 import { Address } from './../../../models/address';
 import { UtilService } from '../../../util/util.service';
 import { AddressService } from '../../../services/address.service';
-import { Component, OnInit, Inject, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Inject, Input, Output, EventEmitter, OnChanges } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpStatus } from 'src/app/models/enum/http-status.enum';
 
@@ -10,7 +10,7 @@ import { HttpStatus } from 'src/app/models/enum/http-status.enum';
   templateUrl: './address-register.component.html',
   styleUrls: ['./address-register.component.scss']
 })
-export class AddressRegisterComponent implements OnInit {
+export class AddressRegisterComponent implements OnChanges {
   private formAddress: FormGroup;
 
   @Input('invalidForm') invalidForm: boolean;
@@ -19,9 +19,10 @@ export class AddressRegisterComponent implements OnInit {
 
   constructor(@Inject(FormBuilder) private formBuilder: FormBuilder,
     @Inject(AddressService) private addressService: AddressService,
-    @Inject(UtilService) private utilService: UtilService) { }
+    @Inject(UtilService) private utilService: UtilService) {
+  }
 
-  ngOnInit() {
+  ngOnChanges() {
     this.formControls();
     this.setForm();
   }
@@ -72,14 +73,12 @@ export class AddressRegisterComponent implements OnInit {
   }
 
   private setForm() {
-    if (this.address.city) {
-      this.formAddress.controls.city.setValue(this.address.city.name);
-      this.formAddress.controls.IDCity.setValue(this.address.city.id);
+    if (this.address.city && this.address.city.state) {
+        this.formAddress.controls.city.setValue(this.address.city.name);
+        this.formAddress.controls.IDCity.setValue(this.address.city.id);
 
-      if (this.address.city.state) {
         this.formAddress.controls.state.setValue(this.address.city.state.name);
         this.formAddress.controls.IDState.setValue(this.address.city.state.id);
-      }
     }
   }
 

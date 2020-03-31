@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, OnInit, Inject, Input, OnChanges } from '@angular/core';
 import { UtilService } from 'src/app/util/util.service';
 
 @Component({
@@ -6,14 +6,14 @@ import { UtilService } from 'src/app/util/util.service';
   templateUrl: './dropzone.component.html',
   styleUrls: ['./dropzone.component.scss']
 })
-export class DropzoneComponent implements OnInit {
+export class DropzoneComponent implements OnChanges {
   public files: File[] = [];
   @Input('files') inputFiles: string;
   public description = 'Arraste o arquivo aqui ou clique para fazer upload';
 
   constructor(@Inject(UtilService) private utilService: UtilService) { }
 
-  ngOnInit() {
+  ngOnChanges() {
     if (this.inputFiles && this.inputFiles.length > 0) {
       this.writeFile(this.inputFiles, 'image.jpg').then(file => this.files.push(file));
     }

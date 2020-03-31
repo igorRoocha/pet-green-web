@@ -6,7 +6,6 @@ import { UtilService } from 'src/app/util/util.service';
 import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ContactRegisterComponent } from '../contact-register/contact-register.component';
-import { SchedulesRegisterComponent } from '../schedules-register/schedules-register.component';
 import { DropzoneComponent } from '../../dropzone/dropzone.component';
 import { State } from 'src/app/models/state';
 import { HttpStatus } from 'src/app/models/enum/http-status.enum';
@@ -72,11 +71,11 @@ export class NewCatererComponent implements OnInit {
     this.address = res.value;
     this.city.name = res.value.city;
     this.city.ibge = res.value.ibge;
-    this.city.id = res.value.IDCity;
+    this.city.id = this.utilService.stringIsNullOrEmpty(res.value.IDCity) ? null : res.value.IDCity;
 
     this.state.name = res.value.state;
     this.state.uf = res.value.uf;
-    this.state.id = res.value.IDState;
+    this.state.id = this.utilService.stringIsNullOrEmpty(res.value.IDState) ? null : res.value.IDState;
 
     this.invalidAddress = res.invalid;
   }
@@ -137,13 +136,14 @@ export class NewCatererComponent implements OnInit {
     let msg;
     let title;
 
+    console.log(this.caterer);
     this.catererService.register(this.caterer).subscribe((c: any) => {
       this.utilService.successMsg('Cadastrado com sucesso!', () => {
         this.goTo('app/fornecedores');
       });
     }, err => {
       if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND) {
-        title = 'Ocorreu um erro durante o cadastro de fornecedor :(';
+        title = 'Ocorreu um erro durante o cadastro de fornecedor';
         msg = 'Por favor, entre em contato com nossa equipe para resolvermos o problema o mais breve possível.';
         this.utilService.errorMsg(msg, title, () => { });
       }
@@ -157,7 +157,6 @@ export class NewCatererComponent implements OnInit {
   private edit() {
     let msg;
     let title;
-    console.log(this.caterer);
     this.catererService.edit(this.caterer).subscribe((c: any) => {
       this.utilService.successMsg('Alterado com sucesso!', () => {
         this.goTo('app/fornecedores');
@@ -165,7 +164,7 @@ export class NewCatererComponent implements OnInit {
     }, err => {
       if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND ||
           err.status === HttpStatus.INTERNAL_SERVER_ERROR) {
-        title = 'Ocorreu um erro durante a atualização de fornecedor :(';
+        title = 'Ocorreu um erro durante a atualização de fornecedor';
         msg = 'Por favor, entre em contato com nossa equipe para resolvermos o problema o mais breve possível.';
         this.utilService.errorMsg(msg, title, () => { });
       }
@@ -174,11 +173,5 @@ export class NewCatererComponent implements OnInit {
         this.utilService.alertMsg('Foi encontrado um cadastro no sistema com o mesmo CPF/CNPJ.', () => { });
       }
     });
-  }
-
-  private setCatererForEdit() {
-    this.caterer.id = this.catererFromState.id;
-    this.caterer.address[0].id = this.catererFromState.address[0].id;
-    this.caterer.contacts
   }
 }

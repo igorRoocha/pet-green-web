@@ -1,15 +1,16 @@
-import { state } from '@angular/animations';
 import { HttpStatus } from './../../../models/enum/http-status.enum';
 import { ClinicService } from './../../../services/clinic.service';
 import { Address } from './../../../models/address';
 import { Clinic } from './../../../models/clinic';
 import { ContactRegisterComponent } from './../../../components/registers/contact-register/contact-register.component';
-import { Component, OnInit, Inject, ViewChild } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild, OnChanges } from '@angular/core';
 import { UtilService } from 'src/app/util/util.service';
 import { SchedulesRegisterComponent } from 'src/app/components/registers/schedules-register/schedules-register.component';
 import { DropzoneComponent } from 'src/app/components/dropzone/dropzone.component';
 import { State } from 'src/app/models/state';
 import { City } from 'src/app/models/city';
+import { Contact } from 'src/app/models/contact';
+import { Schedules } from 'src/app/models/schedules';
 
 @Component({
   selector: 'app-clinic',
@@ -17,8 +18,12 @@ import { City } from 'src/app/models/city';
   styleUrls: ['./clinic.component.scss']
 })
 export class ClinicComponent implements OnInit {
-  private clinic: Clinic;
-  public address: Address = new Address() as Address;
+  public clinic: Clinic = new Clinic();
+  public contacts: Contact[];
+  public schedules: Schedules[];
+  public files: File[] = [];
+
+  public address: Address = new Address();
   private city: City = new City();
   private state: State = new State();
   private invalidClinic: boolean;
@@ -34,6 +39,19 @@ export class ClinicComponent implements OnInit {
     @Inject(ClinicService) private clinicService: ClinicService) { }
 
   ngOnInit() {
+    this.getClinic();
+  }
+
+  private getClinic() {
+    this.clinicService.getClinicByUserID(this.utilService.getUser().id).subscribe((c: any) => {
+      if (c) {
+        this.clinic = c;
+        this.address = c.address;
+        this.contacts = c.contacts;
+        this.schedules = c.schedules;
+        this.files = c.logo;
+      }
+    });
   }
 
   public getValuesClinicRegisterForm(res) {
@@ -45,9 +63,11 @@ export class ClinicComponent implements OnInit {
     this.address = new Address(res.value);
     this.city.name = res.value.city;
     this.city.ibge = res.value.ibge;
+    this.city.id = this.utilService.stringIsNullOrEmpty(res.value.IDCity) ? null : res.value.IDCity;
 
     this.state.name = res.value.state;
     this.state.uf = res.value.uf;
+    this.state.id = this.utilService.stringIsNullOrEmpty(res.value.IDState) ? null : res.value.IDState;
 
     this.invalidAddress = res.invalid;
   }
@@ -68,10 +88,14 @@ export class ClinicComponent implements OnInit {
       return;
     }
 
-    this.setAddress();
-    this.setClinic();
-    this.register();
-
+    if (this.clinic.id) {
+      this.setAddress();
+      this.setClinic(true);
+    } else {
+      this.setAddress();
+      this.setClinic(false);
+      this.getClinic();
+    }
   }
 
   private setAddress() {
@@ -81,7 +105,7 @@ export class ClinicComponent implements OnInit {
     this.address.city.state = this.state;
   }
 
-  private setClinic() {
+  private setClinic(edit) {
     this.clinic.address = this.address;
     this.clinic.contacts = this.contactRegisterComponent.contacts;
     this.clinic.schedules = this.schedulesRegisterComponent.schedules;
@@ -90,7 +114,20 @@ export class ClinicComponent implements OnInit {
     if (this.dropzoneComponent.files !== undefined && this.dropzoneComponent.files.length > 0) {
       this.dropzoneComponent.readFile(this.dropzoneComponent.files[0]).then(content => {
         this.clinic.logo = content.toString();
+
+        if (!edit) {
+          this.register();
+        } else {
+          this.edit();
+        }
       });
+    } else {
+      if (!edit) {
+        this.register();
+      } else {
+        this.edit();
+      }
+
     }
   }
 
@@ -98,7 +135,7 @@ export class ClinicComponent implements OnInit {
     let msg;
     let title;
     this.clinicService.register(this.clinic).subscribe((c: any) => {
-      this.utilService.successMsg('Cadastrado com sucesso!', () => {});
+      this.utilService.successMsg('Cadastrado com sucesso!', () => { });
     }, err => {
       if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND) {
         title = 'Ocorreu um erro durante o cadastro de empresa :(';
@@ -107,7 +144,26 @@ export class ClinicComponent implements OnInit {
       }
 
       if (err.status === HttpStatus.CONFLICT) {
-        this.utilService.alertMsg('Foi encontrado um cadastro no sistema com o mesmo CPF/CNPJ.', () => {});
+        this.utilService.alertMsg('Foi encontrado um cadastro no sistema com o mesmo CPF/CNPJ.', () => { });
+      }
+    });
+  }
+
+  private edit() {
+    let msg;
+    let title;
+    this.clinicService.edit(this.clinic).subscribe((c: any) => {
+      this.utilService.successMsg('Alterado com sucesso!', () => { });
+    }, err => {
+      if (err.status === HttpStatus.BAD_REQUEST || err.status === HttpStatus.NOT_FOUND ||
+        err.status === HttpStatus.INTERNAL_SERVER_ERROR) {
+        title = 'Ocorreu um erro durante a atualização da empresa';
+        msg = 'Por favor, entre em contato com nossa equipe para resolvermos o problema o mais breve possível.';
+        this.utilService.errorMsg(msg, title, () => { });
+      }
+
+      if (err.status === HttpStatus.CONFLICT) {
+        this.utilService.alertMsg('Foi encontrado um cadastro no sistema com o mesmo CPF/CNPJ.', () => { });
       }
     });
   }

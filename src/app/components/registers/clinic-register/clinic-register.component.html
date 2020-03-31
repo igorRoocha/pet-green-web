@@ -3,7 +3,7 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>Nome da empresa*</label>
-          <input type="text" placeholder="Nome da empresa" class="form-control" formControlName="name" required>
+          <input type="text" placeholder="Nome da empresa" [ngModel]="clinic?.name" class="form-control" formControlName="name" required>
           <div *ngIf="fgd.name.errors && (fgd.name.dirty || fgd.name.touched || invalidForm)">
             <small class="d-flex justify-content-start text-danger" *ngIf="fgd.name.errors.required">Campo
               obrigatório</small>
@@ -13,7 +13,8 @@
       <div class="col-md-2">
         <div class="form-group">
           <label>CNPJ*</label>
-          <input type="text" placeholder="CNPJ" (blur)="validateTaxId(fgd.taxId.value)" class="form-control"
+          <input type="text" placeholder="CNPJ" (blur)="validateTaxId(fgd.taxId.value)" 
+            [ngModel]="clinic?.taxId | cnpj" class="form-control"
             maxlength="18" formControlName="taxId" cnpj required>
           <div *ngIf="fgd.taxId.errors && (fgd.taxId.dirty || fgd.taxId.touched || invalidForm)">
             <small class="d-flex justify-content-start text-danger" *ngIf="fgd.taxId.errors.required">Campo
@@ -26,7 +27,8 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>Razão Social*</label>
-          <input type="text" placeholder="Razão social" (blur)="validateSocialReason(fgd.socialReason.value)"
+          <input type="text" placeholder="Razão social" [ngModel]="clinic?.socialReason" 
+            (blur)="validateSocialReason(fgd.socialReason.value)"
             class="form-control" formControlName="socialReason" required>
           <div *ngIf="fgd.socialReason.errors && (fgd.socialReason.dirty || fgd.socialReason.touched || invalidForm)">
             <small class="d-flex justify-content-start text-danger" *ngIf="fgd.socialReason.errors.required">Campo
@@ -37,7 +39,8 @@
       <div class="col-md-3">
         <div class="form-group">
           <label>E-mail Comercial*</label>
-          <input type="text" placeholder="E-mail Comercial" class="form-control" formControlName="email" required>
+          <input type="text" placeholder="E-mail Comercial" class="form-control" 
+            [ngModel]="clinic?.email"  formControlName="email" required>
           <div *ngIf="fgd.email.errors && (fgd.email.dirty || fgd.email.touched || invalidForm)">
             <small class="d-flex justify-content-start text-danger" *ngIf="fgd.email.errors.required">Campo
               obrigatório</small>
@@ -54,7 +57,8 @@
             <span class="badge badge-pill badge-secondary cursor-click"
               tooltip="Link para o site da empresa.">?</span>
           </label>
-          <input type="text" placeholder="Site" formControlName="site" class="form-control">
+          <input type="text" placeholder="Site" formControlName="site" class="form-control"
+            [ngModel]="clinic?.site">
         </div>
       </div>
     </div>
@@ -65,8 +69,10 @@
             <span class="badge badge-pill badge-secondary cursor-click"
               tooltip="Link do Facebook da empresa.">?</span>
           </label>
-          <input type="text" placeholder="Facebook" formControlName="facebook" class="form-control">
+          <input type="text" placeholder="Facebook" formControlName="facebook" class="form-control"
+            [ngModel]="clinic?.facebook">
         </div>
       </div>
     </div>
+    <input type="hidden" formControlName="id" [ngModel]="clinic?.id">
   </form>
