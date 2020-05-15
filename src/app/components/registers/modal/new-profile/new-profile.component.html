@@ -1,0 +1,61 @@
+<div>
+  <div class="modal-header">
+    <h4 id="pageTitle" class="modal-title pull-left">{{title}}</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="container-fluid">
+    <div class="modal-body">
+      <form [formGroup]="fmProfile">
+        <div class="row">
+          <div class="form-group col-md-12">
+            <label>Nome*</label>
+            <input type="text" placeholder="Nome" formControlName="name" class="form-control" required
+              autocomplete="off">
+            <div
+              *ngIf="fmProfile.controls['name'].invalid && (fmProfile.controls['name'].dirty || fmProfile.controls['name'].touched || invalid)">
+              <small class="d-flex justify-content-start text-danger"
+                *ngIf="fmProfile.controls['name'].errors.required">Campo
+                obrigatório</small>
+              <small class="d-flex justify-content-start text-danger" *ngIf="fmProfile.controls['name'].errors.exists">
+                Não é permitido informar nome de raças que já estão cadastradas
+              </small>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-12 mt-2">
+            <h5>Permissões de Acesso</h5>
+            <div class="card shadow-card-modal">
+              <div class="card-body">
+                <table class="table table-hover table-scroll">
+                  <thead>
+                    <tr>
+                      <th scope="col" class="header-table">Nome</th>
+                      <th scope="col" class="header-table" style="text-align: right;">Acesso</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let permission of permissions">
+                      <td style="width: 95%;">{{ permission.name }}</td>
+                      <td align="right" style="text-align: center;">
+                        <ui-switch size="small" color="#318aff" (valueChange)="onValueChange($event, permission)"></ui-switch>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="modal-footer text-right footer md-8">
+      <button class="btn btn-success btn-footer click" style="width: 85px;" (click)="save();">Salvar <i
+          class="fas fa-check" style="font-size: 0.8rem;"></i></button>
+      <button class="btn btn-danger btn-footer ml-2 click" style="width: 85px;" (click)="bsModalRef.hide()">Fechar <i
+          class="far fa-window-close" style="font-size: 0.8rem;"></i></button>
+    </div>
+  </div>
+</div>

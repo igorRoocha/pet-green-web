@@ -60,7 +60,8 @@ export class SidebarService {
           path: 'app/cadastro-pelagem'
         },
         {
-          title: 'Perfis de Acesso'
+          title: 'Perfis de Acesso',
+          path: 'app/cadastro-perfil-acesso'
         },
         {
           title: 'Serviços'

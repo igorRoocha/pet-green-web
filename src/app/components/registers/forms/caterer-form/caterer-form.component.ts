@@ -9,7 +9,7 @@ import { UtilService } from 'src/app/util/util.service';
   styleUrls: ['./caterer-form.component.scss']
 })
 export class CatererFormComponent implements OnInit {
-  private formGeneralData: FormGroup;
+  public formGeneralData: FormGroup;
   @Input('invalidForm') invalidForm: boolean;
   @Input('caterer') caterer: Caterer = new Caterer();
   @Output('resComponent') resComponent: EventEmitter<any> = new EventEmitter();

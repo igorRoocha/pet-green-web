@@ -16,6 +16,7 @@ export class NewBreedComponent implements OnInit {
   public species: any;
   public answer: any;
   public invalid = false;
+  public title: string;
 
   @Input('fmBreed') fmBreed: FormGroup;
   @Output('fmChanged') fmChanged = new EventEmitter();

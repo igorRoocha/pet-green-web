@@ -17,7 +17,7 @@ export class UserService {
     }
 
     public login(user) {
-        return this.http.post(`${this.baseUrl}login`, user).pipe(map(res => res));
+        return this.http.post(`${this.baseUrl}login`, user, this.header).pipe(map(res => res));
     }
 
     public post(user) {

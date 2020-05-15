@@ -1,0 +1,22 @@
+@import "../../../../../assets/sass/pet-green/internal.scss";
+
+.footer {
+    max-width: 100%;
+}
+
+.btn-footer {
+    width: 10%;
+}
+
+.table-scroll tbody {
+    display: block;
+    max-height: 32vh;
+    overflow-y: scroll;
+}
+  
+.table-scroll thead,
+  tbody {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}

@@ -9,6 +9,8 @@ import { UtilService } from 'src/app/util/util.service';
   styleUrls: ['./new-coat.component.scss']
 })
 export class NewCoatComponent implements OnInit {
+  public  title: string;
+  public invalid: boolean;
   @Input('fmCoat') fmCoat: FormGroup;
   @Output('fmChanged') fmChanged = new EventEmitter();
 
@@ -26,6 +28,10 @@ export class NewCoatComponent implements OnInit {
         Validators.required
       ]]
     });
+  }
+
+  public save() {
+
   }
 
 }

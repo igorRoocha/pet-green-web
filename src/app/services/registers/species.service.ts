@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
 import { API_URL } from 'src/assets/constants';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UtilService } from 'src/app/util/util.service';
 import { map } from 'rxjs/operators';
 import { Specie } from 'src/app/models/registers/specie';
+import { UtilService } from 'src/app/util/util.service';
 
 @Injectable()
 export class SpecieService {

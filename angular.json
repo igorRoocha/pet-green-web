@@ -17,6 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "dist/mouse-vet-med-web",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -29,7 +30,8 @@
             "styles": [
               "./node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/assets/sass/pet-green.scss",
-              "src/styles.scss"
+              "src/styles.scss",
+              "./node_modules/ngx-ui-switch/ui-switch.component.css"
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.min.js",
@@ -60,6 +62,10 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ]
             }
@@ -143,5 +149,8 @@
       }
     }
   },
-  "defaultProject": "mouse-vet-med-web"
+  "defaultProject": "mouse-vet-med-web",
+  "cli": {
+    "analytics": "a680e9d1-c461-4895-ad83-3620b1feb488"
+  }
 }

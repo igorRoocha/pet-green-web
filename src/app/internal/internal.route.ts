@@ -14,26 +14,30 @@ import { clinicRegisterRoute } from './registers/clinic/clinic.route';
 import { speciesRegisterRoute } from './registers/species/species.route';
 import { BreedComponent } from './registers/breed/breed.component';
 import { CatererComponent } from './registers/caterer/caterer.component';
-import { newCatererRoute } from '../components/registers/new-caterer/new-caterer.route';
+import { newCatererRoute } from '../components/registers/register/caterer-register/caterer-register.route';
+import { ProfileComponent } from './registers/profile/profile.component';
+import { profileRegisterRoute } from './registers/profile/profile.route';
 
 export const MODULE_ROUTES_INTERNAL: Route[] = [
     breedRegisterRoute,
     catererRoute,
     clinicRegisterRoute,
     coatRegisterRoute,
+    home_route,
     newCatererRoute,
     speciesRegisterRoute,
-    home_route,
+    profileRegisterRoute,
     { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
 export const MODULE_COMPONENTS_INTERNAL = [
+    BreedComponent,
     CatererComponent,
     ClinicComponent,
     CoatComponent,
     HomeComponent,
     SpeciesComponent,
-    BreedComponent
+    ProfileComponent,
 ];
 
 export const MODULE_SERVICES_INTERNAL = [

@@ -2,10 +2,10 @@ import { HttpStatus } from './../../../models/enum/http-status.enum';
 import { ClinicService } from './../../../services/clinic.service';
 import { Address } from './../../../models/address';
 import { Clinic } from './../../../models/clinic';
-import { ContactRegisterComponent } from './../../../components/registers/contact-register/contact-register.component';
+import { ContactRegisterComponent } from '../../../components/registers/register/contact-register/contact-register.component';
 import { Component, OnInit, Inject, ViewChild, OnChanges } from '@angular/core';
 import { UtilService } from 'src/app/util/util.service';
-import { SchedulesRegisterComponent } from 'src/app/components/registers/schedules-register/schedules-register.component';
+import { SchedulesRegisterComponent } from 'src/app/components/registers/register/schedules-register/schedules-register.component';
 import { DropzoneComponent } from 'src/app/components/dropzone/dropzone.component';
 import { State } from 'src/app/models/state';
 import { City } from 'src/app/models/city';
@@ -28,8 +28,8 @@ export class ClinicComponent implements OnInit {
   private state: State = new State();
   private invalidClinic: boolean;
   private invalidAddress: boolean;
-  private statusFormClinic: boolean;
-  private statusFormAddress: boolean;
+  public statusFormClinic: boolean;
+  public statusFormAddress: boolean;
 
   @ViewChild(ContactRegisterComponent) contactRegisterComponent: ContactRegisterComponent;
   @ViewChild(SchedulesRegisterComponent) schedulesRegisterComponent: SchedulesRegisterComponent;

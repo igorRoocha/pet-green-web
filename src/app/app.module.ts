@@ -20,6 +20,7 @@ import { DirectiveModule } from './directive/directive.module';
 import { routing } from './app.route';
 import { InterceptedHttp } from './util/http.interceptor';
 import { TagInputModule } from 'ngx-chips';
+import { UiSwitchModule } from 'ngx-ui-switch';
 export const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
   suppressScrollX: true
 };
@@ -46,11 +47,12 @@ export const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface =
     ComponentsModule,
     HttpClientModule,
     DirectiveModule,
+    UiSwitchModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
-      useValue: { disableClose: true, minWidth: 400, hasBackdrop: true },
+      //useValue: { disableClose: true, minWidth: 400, hasBackdrop: true },
       useClass: InterceptedHttp,
       multi: true
     },

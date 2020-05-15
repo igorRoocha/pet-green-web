@@ -11,7 +11,7 @@
         <div class="col-md-12">
           <label>Dia(s) de Funcionamento*</label>
           <tag-input [ngModel]="itemsAdded" [maxItems]="7" [ngModelOptions]="{standalone: true}" [theme]="'foundation-theme'" 
-                     [onlyFromAutocomplete]="true" (onblur)="validateInputTagIsEmpty($event)" 
+                     [onlyFromAutocomplete]="true"
                      (onAdd)="onAddedTagInput($event)" (onRemove)="onRemoveTagInput($event)">
             <tag-input-dropdown [appendToBody]="false" 
                                 [autocompleteItems]="itemsTagInput">

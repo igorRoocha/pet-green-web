@@ -44,7 +44,6 @@ export class LoginComponent implements OnInit {
     if (this.formLogin.invalid) {
       return;
     }
-
     this.userService.login(this.formLogin.value).subscribe((x: any) => {
       this.utilService.saveCookies(x);
       this.utilService.goTo(this.router, 'app/home');

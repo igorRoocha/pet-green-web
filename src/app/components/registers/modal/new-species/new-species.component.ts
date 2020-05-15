@@ -14,6 +14,7 @@ export class NewSpeciesComponent implements OnInit {
   public specie: any;
   public answer: any;
   public invalid = false;
+  public title: string;
 
   @Input('formGroup') fmSpecies: FormGroup;
   @Output('fmChanged') fmChanged = new EventEmitter();

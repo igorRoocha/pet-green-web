@@ -24,6 +24,7 @@ export class NewScheduleComponent implements OnInit {
   public answer: any;
   public itemsTagInput = ['Segunda-Feira', 'Terça-Feira', 'Quarta-Feira', 'Quinta-Feira', 'Sexta-Feira', 'Sábado', 'Domingo'];
   public itemsAdded = [];
+  public title: string;
 
   @Input('formGroup') fmSchedules: FormGroup;
   @Output('fmChanged') fmChanged = new EventEmitter();

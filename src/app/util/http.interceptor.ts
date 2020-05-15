@@ -1,4 +1,3 @@
-import { UtilService } from './util.service';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from '@angular/common/http';
 
 import { throwError as observableThrowError, Observable } from 'rxjs';
@@ -12,9 +11,7 @@ declare var swal: any;
 
 @Injectable()
 export class InterceptedHttp implements HttpInterceptor {
-    constructor(@Inject(UtilService) private utilService: UtilService) {
-    }
-
+    constructor() {}
 
     intercept(
         req: HttpRequest<any>,
@@ -26,7 +23,6 @@ export class InterceptedHttp implements HttpInterceptor {
             finalize(() => {
                 this.afterRequest();
             }));
-
     }
 
     private beforeRequest() {

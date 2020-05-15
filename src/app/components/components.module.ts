@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { MODULE_COMPONENTS, MODULE_SERVICES_COMPONENTS,  } from './components.route';
 import { TagInputModule } from 'ngx-chips';
 import { NgxDropzoneModule } from 'ngx-dropzone';
+import { UiSwitchModule } from 'ngx-ui-switch';
 
 @NgModule({
     imports: [
@@ -25,6 +26,7 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
         AppBotstrapModule,
         UtilModule,
         HttpModule,
+        UiSwitchModule,
         RouterModule.forChild([]),
         ReactiveFormsModule.withConfig({warnOnNgModelWithFormControl: 'never'})
     ],
